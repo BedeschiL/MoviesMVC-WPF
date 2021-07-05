@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>BLL_BusinessLogicLayer</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DAL-DataAcessLayer\DAL-DataAcessLayer.csproj" />
+    <ProjectReference Include="..\DTO-DataTransferObject\DTO-DataTransferObject.csproj" />
+  </ItemGroup>
+
+</Project>
