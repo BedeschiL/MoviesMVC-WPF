@@ -8,7 +8,7 @@ namespace DAL_DataAcessLayer
 {
     public class Comment
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
         public string Content { get; set; }

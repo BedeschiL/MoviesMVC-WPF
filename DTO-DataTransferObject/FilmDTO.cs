@@ -16,7 +16,7 @@ namespace DTO_DataTransferObject
 		public FilmDTO()
 		{
 		}
-		public FilmDTO(int id, string title, DateTime? rd, float va, int rt, string pp)
+		public FilmDTO(int id, string title, DateTime? rd, float va, int rt, string pp, List<CommentDTO> comments)
 		{
 			Id = id;
 			Title = title;

@@ -8,23 +8,23 @@ namespace BLL_BusinessLogicLayer
 {
     public class BLLmanager
     {
-        private DALmanager DALmanager; 
+        private DALmanager dalManager; 
         public  BLLmanager()
         {
-            DALmanager = new DALmanager(); 
+            dalManager = new DALmanager(); 
         }
-        
+        //Actors
+        #region GetListActorsByIdFilm
         public ICollection<LightActorDTO> GetListActorsByIdFilm(int id)
         {
             ICollection<LightActorDTO> retFoncActor = new List<LightActorDTO>();
             Film retFilm = new Film();
            
-            retFilm = DALmanager.SelectFilmWithId(id);
-            Console.WriteLine(retFilm.Comments.Count);
-            Console.WriteLine(retFilm.Actors.Count);
+            retFilm = dalManager.SelectFilmWithId(id);
+           
             if (retFilm != null)
             {
-                Console.WriteLine("Count" + retFilm.Actors.Count);
+               
                 foreach (Actor A in retFilm.Actors)
                 {
                     LightActorDTO temp = new LightActorDTO(A.Id, A.Name, A.Surname);
@@ -35,13 +35,118 @@ namespace BLL_BusinessLogicLayer
             }
             return retFoncActor;
         }
+        #endregion
+        #region GetFavoriteActors
+        public ICollection<ActorDTO> GetFavoriteActors(int nbDefilmCondition)
+        {
+            List<ActorDTO> listFavoriteAct = new List<ActorDTO>();
+            var listactor = dalManager.SelectActorNbFilmMin(nbDefilmCondition);
 
 
+            foreach (Actor a in listactor)
+            {
+
+                listFavoriteAct.Add(new ActorDTO(a.Id, a.Name, a.Surname));
 
 
+            }
+            return listFavoriteAct;
+        }
+        #endregion
+        //Types
+        #region GetListFilmTypesByIdFilm
+        public ICollection<FilmTypeDTO> GetListFilmTypesByIdFilm(int id)
+        {
+            ICollection<FilmTypeDTO> retFoncTypes = new List<FilmTypeDTO>();
+            Film retFilm = new Film();
+            retFilm = dalManager.SelectFilmWithId(id);
+            if (retFilm != null)
+            {
+                
+                foreach (FilmType A in retFilm.Types)
+                {
+                    FilmTypeDTO temp = new FilmTypeDTO(A.Id, A.Name);
+                   
+                    retFoncTypes.Add(temp);
+                }
+            }
+            return retFoncTypes;
+        }
+        #endregion
+        //Film
+        #region FindListFilmByPartialActorName
+        public List<FilmDTO> FindListFilmByPartialActorName(String name, int maxFilm)
+        {
+            var listactor = dalManager.SelectActorWithName(name);
 
+            List<FilmDTO> ListFilm = new List<FilmDTO>();
+            int i = 0;
 
+            foreach (Actor a in listactor)
+            {
+                i++;
+                if (i > maxFilm)
+                    break;
+                foreach (Film f in a.Films)
+                {
+                    List<CommentDTO> Comments = new List<CommentDTO>();
+                    foreach (Comment c in f.Comments)
+                    {
+                        Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date));
+                    }
+                    ListFilm.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
+                }
+            }
+
+            return (ListFilm);
+        }
+        #endregion
+        #region GetFullFilmDetailsByIdFilm
+        public FullFilmDTO GetFullFilmDetailsByIdFilm(int id)
+        {
+            Film f = new Film();
+            ICollection<ActorDTO> listActeur = new List<ActorDTO>();
+            ICollection<FilmTypeDTO> listFilmType = new List<FilmTypeDTO>();
+            ICollection<CommentDTO> listComment = new List<CommentDTO>();
+            f = dalManager.SelectFilmWithId(id);
+
+            if (f != null)
+            {
+                foreach (Actor acTemp in f.Actors)
+                {
+                    listActeur.Add(new ActorDTO(acTemp.Id, 0, acTemp.Name, acTemp.Surname));
+                }
+                foreach (FilmType tTemp in f.Types)
+                {
+                    listFilmType.Add(new FilmTypeDTO(tTemp.Id, tTemp.Name));
+                }
+                foreach (Comment cTemp in f.Comments)
+                {
+                    listComment.Add(new CommentDTO(cTemp.Content, cTemp.Rate, cTemp.Username, cTemp.Date, f ));
+                }
+                FullFilmDTO ffDTO = new FullFilmDTO(f.Id, f.Title, f.Date,
+                    f.VoteAverage, f.Runtime, f.Posterpath, listActeur, listFilmType, listComment);
+                return ffDTO;
+            }
+            return null;
+        }
+        #endregion
+        //Comment
+        #region InsertCommentOnFilmId
+        public Boolean InsertCommentOnFilmId(int IDF, CommentDTO c)
+        {
+            Film f = dalManager.SelectFilmWithId(IDF);
+            if (f != null)
+                dalManager.InsertComment(new Comment(1,c.Content, c.Rate, c.Username, c.Date, f));
+            else
+                return (false);
+            return (true);
+        }
+        #endregion
 
 
     }
+   
+
+
 }

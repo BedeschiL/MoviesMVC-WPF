@@ -21,21 +21,5 @@ namespace DAL_DataAcessLayer
         public virtual ICollection<Actor> Actors { get; set; } = new List<Actor>();
         public virtual ICollection<FilmType> Types { get; set; } = new List<FilmType>();
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-        public String Draw()
-        {
-            string temp = (Id + Title);
-
-            foreach (Actor a in this.Actors)
-            {
-                temp = temp + a.Draw();
-            }
-            foreach (FilmType t in this.Types)
-            {
-                temp = temp + t.Id + t.Name;
-            }
-            temp = temp + "\n";
-            return temp;
-        }
     }
 }

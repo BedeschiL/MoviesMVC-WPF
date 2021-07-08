@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL_DataAcessLayer;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,7 +13,7 @@ namespace DTO_DataTransferObject
 		public string Username { get; set; }
 	
 		public DateTime Date { get; set; }
-		public FilmDTO Film { get; set; } //one to many avec film
+		public Film Film { get; set; } //one to many avec film
 
 		public CommentDTO()
 		{
@@ -23,7 +24,7 @@ namespace DTO_DataTransferObject
 			Rate = rate;
 			Username = username;
 		}
-		public CommentDTO(string content, int rate, string username, DateTime date, FilmDTO film)
+		public CommentDTO(string content, int rate, string username, DateTime date, Film film)
 		{
 			Content = content;
 			Rate = rate;
@@ -31,5 +32,9 @@ namespace DTO_DataTransferObject
 			Date = date;
 			Film = film;
 		}
-	}
+
+        public CommentDTO(string content, int rate, string username, DateTime date) : this(content, rate, username)
+        {
+        }
+    }
 }

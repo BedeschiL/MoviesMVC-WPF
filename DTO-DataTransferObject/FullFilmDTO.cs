@@ -52,6 +52,15 @@ namespace DTO_DataTransferObject
         public ICollection<FilmTypeDTO> TypesDTO { get; set; } = new List<FilmTypeDTO>();
         public ICollection<CommentDTO> CommentsDTO = new List<CommentDTO>();
 
- 
+        public String ToString()
+        {
+
+            String temp = "ID:" + this.Id;
+            foreach (FilmTypeDTO t in this.TypesDTO)
+            {
+                Console.WriteLine(t.Name);
+            }
+            return temp;
+        }
     }
 }
