@@ -35,19 +35,19 @@ namespace DTO_DataTransferObject
             Posterpath = _pp;
           
         }
-        private int _id;
-        private string _title;
-        private DateTime _date;
-        private float _voteAverage;
-        private int _runtime;
-        private string _posterpath;
-        public int Id { get { return _id; } set { _id = value;  } }
-        public string Title { get { return _title; } set { _title = value;  } }
+        protected int _id;
+        protected string _title;
+        protected DateTime _date;
+        protected float _voteAverage;
+        protected int _runtime;
+        protected string _posterpath;
+        public virtual int Id { get { return _id; } set { _id = value;  } }
+        public virtual string Title { get { return _title; } set { _title = value;  } }
         //Release date du film
-        public DateTime Date { get { return _date; } set { _date = value;} }
-        public float VoteAverage { get { return _voteAverage; } set { _voteAverage = value; } }
-        public int Runtime { get { return _runtime; } set { _runtime = value; } }
-        public string Posterpath { get { return _posterpath; } set { _posterpath = value; } }
+        public virtual DateTime Date { get { return _date; } set { _date = value;} }
+        public virtual float VoteAverage { get { return _voteAverage; } set { _voteAverage = value; } }
+        public virtual int Runtime { get { return _runtime; } set { _runtime = value; } }
+        public virtual string Posterpath { get { return _posterpath; } set { _posterpath = value; } }
         public ICollection<ActorDTO> ActorsDTO { get; set; } = new List<ActorDTO>();
         public ICollection<FilmTypeDTO> TypesDTO { get; set; } = new List<FilmTypeDTO>();
         public ICollection<CommentDTO> CommentsDTO = new List<CommentDTO>();
