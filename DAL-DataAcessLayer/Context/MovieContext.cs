@@ -16,13 +16,14 @@ namespace DAL_DataAcessLayer.Context
         public MovieContext()
         {
             this.Database.EnsureCreated();
-            this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+           
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
             .EnableSensitiveDataLogging()
-        .UseSqlite(@"Data source = " + Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"..\\..\\..\\..\\DataBase\\movie.db")));
-        
+        //.UseSqlite(@"Data source = " + Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"..\\..\\..\\..\\DataBase\\movie.db")));
+        .UseSqlite(@"Data source =C:\\movie\\movie.db");
+
     }
 }

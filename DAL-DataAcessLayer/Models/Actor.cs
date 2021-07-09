@@ -20,23 +20,15 @@ namespace DAL_DataAcessLayer
         {
 
         }
-        public Actor(string text) // Constructeur d’objet Actor
+        public Actor(String AData)
         {
-            string[] acteurdetail, characterdetail;
-            string tmp;
-            Char[] delimiterChars = { '\u2024' };
-            acteurdetail = text.Split(delimiterChars);
-            Id = Int32.Parse(acteurdetail[0]);
-            Name = acteurdetail[1];
-            delimiterChars[0] = '/';
-            tmp = acteurdetail[2];
-            characterdetail = tmp.Split(delimiterChars);
-            Surname = characterdetail[0];
-        }
-
-        public String Draw()
-        {
-            return Id + Name + Surname;
+            var infoacteur = AData.Split('\u2024');
+            Id = Int32.Parse(infoacteur[0], 0);
+            var prenom = infoacteur[1].Split(" ");
+            Name = prenom[0];
+            if (prenom.Length > 1)
+                Surname = prenom[1];
+            Films = new List<Film>();
         }
     }
 }
