@@ -14,7 +14,6 @@ namespace MovieWebAPI.Controllers
     public class FilmTypeController : Controller
     {
         [HttpGet]
-        [Route("idMovie={idMovie}")]
         public ActionResult GetListFilmTypesByIdFilm(int idMovie)
         {
             BLLmanager bllm = new BLLmanager();

@@ -131,13 +131,53 @@ namespace BLL_BusinessLogicLayer
             return null;
         }
         #endregion
+        #region GetPageOfFilmOrderByTitle
+        public List<FilmDTO> GetPageOfFilmDTOOrderByTitle(int index, int nbbypage)
+        {
+            var PageFIlm = dalManager.GetPageOfFilmOrderByTitle(index, nbbypage);
+
+            List<FilmDTO> Page = new List<FilmDTO>();
+
+            foreach (Film f in PageFIlm)
+            {
+                List<CommentDTO> Comments = new List<CommentDTO>();
+                foreach (Comment c in f.Comments)
+                {
+                    Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date));
+                }
+                Page.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
+            }
+            return (Page);
+        }
+
+        #endregion
+        #region GetFilmWithName
+        public List<FilmDTO> GetFilmListWithName(string name, int index, int nbbypage)
+        {
+            var lf = dalManager.GetFilmListWithName(name, index, nbbypage);
+
+            List<FilmDTO> ListFilm = new List<FilmDTO>();
+
+            foreach (Film f in lf)
+            {
+                List<CommentDTO> Comments = new List<CommentDTO>();
+                foreach (Comment c in f.Comments)
+                {
+                    Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date));
+                }
+                ListFilm.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
+            }
+            return (ListFilm);
+        }
+        #endregion
+
         //Comment
         #region InsertCommentOnFilmId
         public Boolean InsertCommentOnFilmId(int IDF, CommentDTO c)
         {
             Film f = dalManager.SelectFilmWithId(IDF);
             if (f != null)
-                dalManager.InsertComment(new Comment(1,c.Content, c.Rate, c.Username, c.Date, f));
+                dalManager.InsertComment(new Comment(c.Content, c.Rate, c.Username, c.Date, f));
             else
                 return (false);
             return (true);

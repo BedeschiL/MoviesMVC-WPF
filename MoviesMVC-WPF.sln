@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO-DataTransferObject", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieWebAPI", "MovieWebAPI\MovieWebAPI.csproj", "{06FADB33-CD33-41D0-87DA-73499956031B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieWEB", "MovieWEB\MovieWEB.csproj", "{78055514-54BC-477D-8DFF-ACADACF710F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,18 @@ Global
 		{06FADB33-CD33-41D0-87DA-73499956031B}.Release|x64.Build.0 = Release|Any CPU
 		{06FADB33-CD33-41D0-87DA-73499956031B}.Release|x86.ActiveCfg = Release|Any CPU
 		{06FADB33-CD33-41D0-87DA-73499956031B}.Release|x86.Build.0 = Release|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Release|x64.Build.0 = Release|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{78055514-54BC-477D-8DFF-ACADACF710F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

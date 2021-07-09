@@ -14,12 +14,12 @@ namespace MovieWebAPI.Controllers
     public class CommentController : Controller
     {
         [HttpGet] 
-        public ActionResult InsertCommentOnFilmId(int idFilm, int idComment, string content, int rate, string username)
+        public ActionResult InsertCommentOnFilmId(int idFilm, string content, int rate, string username)
         {
             BLLmanager bllm = new BLLmanager();
             CommentDTO comment = new CommentDTO(content,rate,username);
             var ret = bllm.InsertCommentOnFilmId(idFilm, comment);
-            if (ret != null)
+            if (ret == true)
             {
                 return Ok(ret);
             }
@@ -27,15 +27,6 @@ namespace MovieWebAPI.Controllers
             {
                 return NotFound();
             }
-
         }
-
-
-
-
-
-
-
-
     }
 }

@@ -13,7 +13,6 @@ namespace MovieWebAPI.Controllers
     public class ActorController : Controller
     {
         [HttpGet]
-        [Route("/idMovie={idMovie}")]
         public ActionResult GetListActorsByIdFilm(int idMovie)
         {
             BLLmanager bllm = new BLLmanager();
@@ -29,7 +28,7 @@ namespace MovieWebAPI.Controllers
            
         }
         [HttpGet]
-        [Route("/nbFilm={nbFilm}")]
+        [Route("favorite")]
         public ActionResult GetFavoriteActors(int nbFilm)
         {
             BLLmanager bllm = new BLLmanager();

@@ -26,18 +26,13 @@ namespace DAL_DataAcessLayer
             Username = username;
             Date = DateTime.Now;
         }
-        public Comment(int id, string content, int rate, string username, DateTime date, Film film)
-        : this(content, rate, username, date, film)
-        {
-            Id = id;
-        }
-
+        
         public Comment(string content, int rate, string username, DateTime date, Film film)
         {
             Content = content;
             Rate = rate;
             Username = username;
-            Date = date;
+            Date = DateTime.Now;
             Film = film;
         }
     }

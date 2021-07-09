@@ -24,17 +24,14 @@ namespace DTO_DataTransferObject
 			Rate = rate;
 			Username = username;
 		}
-		public CommentDTO(string content, int rate, string username, DateTime date, Film film)
-		{
-			Content = content;
-			Rate = rate;
-			Username = username;
+		public CommentDTO(string content, int rate, string username, DateTime date, Film film) :  this(content, rate, username)
+		{				
 			Date = date;
 			Film = film;
 		}
-
         public CommentDTO(string content, int rate, string username, DateTime date) : this(content, rate, username)
         {
+			this.Date = date;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace MoviesMVC_WPF
             /////////////////////////////////////////////////TEST InsertComment
             Console.WriteLine("Insert Comment : \n");
             CommentDTO c = new CommentDTO("Bien", 5,"Louis",DateTime.Now);
-            BLLmanager.InsertCommentOnFilmId(2, c);
+            BLLmanager.InsertCommentOnFilmId(3, c);
             Console.WriteLine(fullFilmDTOs.ToString());
 
             Console.WriteLine("SORTIE DU PROGR!");
