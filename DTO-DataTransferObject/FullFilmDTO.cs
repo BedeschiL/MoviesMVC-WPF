@@ -52,6 +52,7 @@ namespace DTO_DataTransferObject
         public ICollection<FilmTypeDTO> TypesDTO { get; set; } = new List<FilmTypeDTO>();
         public ICollection<CommentDTO> CommentsDTO { get; set; } = new List<CommentDTO>();
 
+        override
         public String ToString()
         {
 
