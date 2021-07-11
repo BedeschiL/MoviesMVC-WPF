@@ -1,8 +1,11 @@
 ﻿using DAL_DataAcessLayer;
 using DAL_DataAcessLayer.Managers;
 using DTO_DataTransferObject;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace BLL_BusinessLogicLayer
 {
@@ -21,7 +24,6 @@ namespace BLL_BusinessLogicLayer
             Film retFilm = new Film();
            
             retFilm = dalManager.SelectFilmWithId(id);
-           
             if (retFilm != null)
             {
                
@@ -89,6 +91,9 @@ namespace BLL_BusinessLogicLayer
                     break;
                 foreach (Film f in a.Films)
                 {
+                    f.Posterpath=getImage(f.Id);
+                    f.VoteAverage = voteAverageCalculator(f);
+
                     List<CommentDTO> Comments = new List<CommentDTO>();
                     foreach (Comment c in f.Comments)
                     {
@@ -112,6 +117,8 @@ namespace BLL_BusinessLogicLayer
 
             if (f != null)
             {
+                f.Posterpath = getImage(f.Id);
+                f.VoteAverage = voteAverageCalculator(f);
                 foreach (Actor acTemp in f.Actors)
                 {
                     listActeur.Add(new ActorDTO(acTemp.Id, 0, acTemp.Name, acTemp.Surname));
@@ -122,7 +129,7 @@ namespace BLL_BusinessLogicLayer
                 }
                 foreach (Comment cTemp in f.Comments)
                 {
-                    listComment.Add(new CommentDTO(cTemp.Content, cTemp.Rate, cTemp.Username, cTemp.Date, f ));
+                    listComment.Add(new CommentDTO(cTemp.Content, cTemp.Rate, cTemp.Username, cTemp.Date, f));
                 }
                 FullFilmDTO ffDTO = new FullFilmDTO(f.Id, f.Title, f.Date,
                     f.VoteAverage, f.Runtime, f.Posterpath, listActeur, listFilmType, listComment);
@@ -140,10 +147,12 @@ namespace BLL_BusinessLogicLayer
 
             foreach (Film f in PageFIlm)
             {
+                f.Posterpath = getImage(f.Id);
+                f.VoteAverage = voteAverageCalculator(f);
                 List<CommentDTO> Comments = new List<CommentDTO>();
                 foreach (Comment c in f.Comments)
                 {
-                    Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date));
+                    Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date,f));
                 }
                 Page.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
             }
@@ -160,6 +169,7 @@ namespace BLL_BusinessLogicLayer
 
             foreach (Film f in lf)
             {
+                f.Posterpath = getImage(f.Id);
                 List<CommentDTO> Comments = new List<CommentDTO>();
                 foreach (Comment c in f.Comments)
                 {
@@ -184,9 +194,43 @@ namespace BLL_BusinessLogicLayer
         }
         #endregion
 
+        #region GetImage
+        public String getImage(int id)
+        {
 
+            HttpClient client = new HttpClient();
+            HttpResponseMessage r = client.GetAsync("https://api.themoviedb.org/3/movie/" + id + "?api_key=b61acbc4c15132b3cb5328f331b3c034").Result;    
+            if (!r.IsSuccessStatusCode)
+            {
+               
+                return "";
+            }
+            else
+            {
+
+                string s = r.Content.ReadAsStringAsync().Result;
+                var data = (JObject)JsonConvert.DeserializeObject(s);
+                String newPath = data["poster_path"].Value<String>();
+                newPath = "https://image.tmdb.org/t/p/w500" + newPath;
+                return newPath;
+            }
+        }
+        #endregion
+        #region VoteAverageCalculator
+        public float voteAverageCalculator(Film f)
+        {
+            int countComment = f.Comments.Count;
+            float voteAverage=0;
+            foreach(Comment c in f.Comments)
+            {
+                voteAverage = voteAverage + c.Rate;
+            }
+            float final = voteAverage / (float)countComment;
+            return (float) Math.Round(final,2);
+        }
+        #endregion
     }
-   
+
 
 
 }

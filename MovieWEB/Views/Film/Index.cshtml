@@ -11,8 +11,7 @@
                 <th width="150">Affiche</th>
                 <th width="150">Titre</th>
                 <th width="100">Duree</th>
-                <th width="200">Note Moyenne</th>
-                <th width="150">Note</th>
+                <th width="200">Note Moyenne</th>         
                 <th width="200">Details</th>
 
             </tr>
@@ -24,17 +23,14 @@
             <tr>
                 <th scope="row">@item.Id</th>
                 <td>
-                    
+                    <img src="@item.Posterpath" width="100" />
                 </td>
+               
                 <td>@item.Title</td>
-                <td>@item.Runtime</td>
+                <td>@item.runtimeToString</td>
                 <td>@item.VoteAverage</td>
                 <td>
-                    <img src="" width="100" />
-                </td>
-
-                <td>
-                    @Html.ActionLink("Details", "Details", "Home", new { ID = item.Id });
+                    @Html.ActionLink("Details", "Details", "Film", new { ID = item.Id });
                 </td>
             </tr>
             }
@@ -43,7 +39,7 @@
 </div>
 <table align="center">
     <tr>
-        <td><a class="nav-link text-dark" data="1" asp-area="" asp-controller="Home" asp-action="BouttonPrevious">Precedent</a></td>
-        <td><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="BouttonNext">Suivant</a></td>
+        <td><a class="nav-link text-dark" data="1" asp-area="" asp-controller="Film" asp-action="BouttonPrevious">Precedent</a></td>
+        <td><a class="nav-link text-dark" asp-area="" asp-controller="Film" asp-action="BouttonNext">Suivant</a></td>
     </tr>
 </table>

@@ -26,12 +26,12 @@ namespace DAL_DataAcessLayer.Managers
 
         public IQueryable<Film> GetPageOfFilmOrderByTitle(int index, int numberbypage)
         {
-            return movC.Films.OrderBy(f => f.Title).Skip(index).Take(numberbypage);
+            return movC.Films.Include("Comments").OrderBy(f => f.Title).Skip(index).Take(numberbypage);
         }
 
         public IQueryable<Film> GetFilmListWithName(string name, int index, int numberbypage)
         {
-            return movC.Films.OrderBy(f => f.Title).Where(f => f.Title.ToLower().Contains(name.ToLower())).Skip(index).Take(numberbypage);
+            return movC.Films.Include("Comments").OrderBy(f => f.Title).Where(f => f.Title.ToLower().Contains(name.ToLower())).Skip(index).Take(numberbypage);
         }
 
         public IQueryable<Actor> SelectActorWithName(String name)

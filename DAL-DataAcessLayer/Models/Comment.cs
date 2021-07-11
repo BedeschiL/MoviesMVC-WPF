@@ -16,7 +16,9 @@ namespace DAL_DataAcessLayer
         public string Username { get; set; }
         public DateTime Date { get; set; }
 
-        public virtual Film Film { get; set; } = new Film();
+        public virtual Film Film { get; set; } = new Film(); // PEUT PETRE OAS UTIL
+
+
         public Comment() { }
         public Comment(int _id, string _content, int _note, string username)
         {
