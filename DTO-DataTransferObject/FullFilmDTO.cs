@@ -50,7 +50,7 @@ namespace DTO_DataTransferObject
         public virtual string Posterpath { get { return _posterpath; } set { _posterpath = value; } }
         public ICollection<ActorDTO> ActorsDTO { get; set; } = new List<ActorDTO>();
         public ICollection<FilmTypeDTO> TypesDTO { get; set; } = new List<FilmTypeDTO>();
-        public ICollection<CommentDTO> CommentsDTO = new List<CommentDTO>();
+        public ICollection<CommentDTO> CommentsDTO { get; set; } = new List<CommentDTO>();
 
         public String ToString()
         {

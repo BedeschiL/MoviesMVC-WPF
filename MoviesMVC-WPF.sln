@@ -8,9 +8,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL-DataAcessLayer", "DAL-DataAcessLayer\DAL-DataAcessLayer.csproj", "{E62F1AEA-6996-4A35-9DCA-0D14B98B8DA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA31CB48-153D-4BC6-9F16-EE55DD0AA81E}"
-	ProjectSection(SolutionItems) = preProject
-		DataBase\movie.db = DataBase\movie.db
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL-BusinessLogicLayer", "BLL-BusinessLogicLayer\BLL-BusinessLogicLayer.csproj", "{80B7969E-F7E6-4A1C-AEF5-A7BF51C800B4}"
 EndProject
@@ -18,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO-DataTransferObject", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieWebAPI", "MovieWebAPI\MovieWebAPI.csproj", "{06FADB33-CD33-41D0-87DA-73499956031B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUImovieWPF", "GUImovieWPF\GUImovieWPF.csproj", "{F03C0055-794B-4C5B-BA66-56D6BD245BA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUImovieWPF", "GUImovieWPF\GUImovieWPF.csproj", "{F03C0055-794B-4C5B-BA66-56D6BD245BA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieWEB", "MovieWEB\MovieWEB.csproj", "{78055514-54BC-477D-8DFF-ACADACF710F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieWEB", "MovieWEB\MovieWEB.csproj", "{78055514-54BC-477D-8DFF-ACADACF710F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

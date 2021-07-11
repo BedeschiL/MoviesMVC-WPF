@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:GUImovieWPF"
         xmlns:view="clr-namespace:GUImovieWPF.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="395" Width="797">
+        Title="MainWindow" Height="800" Width="1000">
     <Grid>
-        <view:FilmView x:Name="FilmViewControl" Loaded="FilmViewControl_Loaded"/>
+        <view:FilmView x:Name="FilmViewControl" Loaded="FilmViewControl_Loaded" HorizontalAlignment="Left"/>
     </Grid>
 </Window>

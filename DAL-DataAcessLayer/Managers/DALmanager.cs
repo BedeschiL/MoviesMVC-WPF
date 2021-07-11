@@ -21,7 +21,7 @@ namespace DAL_DataAcessLayer.Managers
         #endregion
         public Film SelectFilmWithId(int IDF)
         {
-            return (movC.Films.Include("Actors").Include("Types").Include("Comments").FirstOrDefault(f => f.Id == IDF));
+            return movC.Films.Include("Actors").Include("Types").Include("Comments").FirstOrDefault(f => f.Id == IDF);
         }
 
         public IQueryable<Film> GetPageOfFilmOrderByTitle(int index, int numberbypage)
