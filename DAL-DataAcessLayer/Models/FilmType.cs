@@ -34,6 +34,6 @@ namespace DAL_DataAcessLayer
         }
 
 
-        public virtual ICollection<Film> Films { get; } = new List<Film>();
+        public virtual ICollection<Film> Films { get; set; } = new List<Film>();
     }
 }

@@ -42,12 +42,16 @@ namespace MovieWEB.Controllers
                 String rawJson = client.DownloadString(finalQuery);
 
                 List<FilmDTO> lf = JsonConvert.DeserializeObject<List<FilmDTO>>(rawJson);
-                FilmModel.Films = lf;
+                foreach(FilmDTO f in lf)
+                {
+                    FilmModel.Films.Add(new FilmUiModel(f));
+                }
+               
 
 
             }
         }
-      
+       
         public IActionResult Index()
         {
             return View(FilmModel);

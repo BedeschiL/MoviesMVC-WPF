@@ -6,14 +6,14 @@ namespace MovieWEB.Models
 {
     public class ListFilmModel
     {
-        public List<FilmDTO>  Films { get; set; }
-        public ListFilmModel(List<FilmDTO> listFilmDTO)
+        public List<FilmUiModel>  Films { get; set; }
+        public ListFilmModel(List<FilmUiModel> listFilmDTO)
         {
             Films = listFilmDTO;
         }
         public ListFilmModel()
         {
-            Films = new List<FilmDTO>();
+            Films = new List<FilmUiModel>();
         }
       
     }

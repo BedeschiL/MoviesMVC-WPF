@@ -18,11 +18,11 @@ namespace MoviesMVC_WPF
             FileParser fp = new FileParser();
             DALmanager dal = new DALmanager();
             //CREATION DB
-            /*
-            String movieFilePath = "C:\\movie\\movie.txt";
-            fp.LoadTextFileInDB(movieFilePath,1000);*/
+            
+            string movieFilePath = "C:\\movie\\movie.txt";
+            fp.LoadTextFileInDB(movieFilePath,500);
             //------------------------
-          
+          /*
             
             //TEST BLL 
             BLLmanager BLLmanager = new BLLmanager();
@@ -63,7 +63,7 @@ namespace MoviesMVC_WPF
             CommentDTO c = new CommentDTO("Bien", 5,"Louis",DateTime.Now);
             BLLmanager.InsertCommentOnFilmId(3, c);
             Console.WriteLine(fullFilmDTOs.ToString());
-
+          */
             Console.WriteLine("SORTIE DU PROGR!");
             Console.ReadKey();
         }
