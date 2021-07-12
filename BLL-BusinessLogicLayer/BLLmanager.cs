@@ -149,14 +149,14 @@ namespace BLL_BusinessLogicLayer
             {
                 f.Posterpath = getImage(f.Id);
                 f.VoteAverage = voteAverageCalculator(f);
-                List<CommentDTO> Comments = new List<CommentDTO>();
+                ICollection<CommentDTO> listComment = new List<CommentDTO>();
                 foreach (Comment c in f.Comments)
                 {
-                    Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date,f));
+                    listComment.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date, f));
                 }
-                Page.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
+                Page.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, listComment));
             }
-            return (Page);
+            return Page;
         }
 
         #endregion

@@ -20,20 +20,20 @@ namespace MovieWEB.Controllers
     {
 		private readonly ILogger<FilmController> _logger;
         private ListFilmModel FilmModel = new ListFilmModel();
-       
+        private static int currentFilm=0, nextfilm=5;
 
         public FilmController(ILogger<FilmController> logger)
-		{
-			
+		{			
             _logger = logger;
-            LoadFilmFromAPI();
-          
-
 		}
-        private void LoadFilmFromAPI()
+        private void LoadFilmFromAPI(int index, int nbbypage)
         {
+            Trace.WriteLine("\n\nLoadFilmFromapi current " + currentFilm + "nextfilm" + nextfilm);
+            Trace.WriteLine("\n\nCOUNT LIST FILM "+ FilmModel.Films.Count);
+            
+          
             string querytype = "page";
-            string query = "?index=" + 0 + "&nbbypage=" + 5;
+            string query = "?index=" + index + "&nbbypage=" + nbbypage;
 
             using (var client = new WebClient())
             {
@@ -51,9 +51,33 @@ namespace MovieWEB.Controllers
 
             }
         }
-       
+        #region Boutton
+        [Route("FilmController/BouttonPrevious")]
+        public IActionResult BouttonPrevious()
+        {
+            Trace.WriteLine("BouttonPrevious\n");
+            Trace.WriteLine("current " + currentFilm +"nextfilm" + nextfilm);
+            currentFilm -= 5;
+                nextfilm -= 5;
+            
+            return RedirectToAction("Index", "Film");
+        }
+        [Route("FilmController/BouttonNext")]
+        public IActionResult BouttonNext()
+        {
+            Trace.WriteLine("Boutton next\n");
+            Trace.WriteLine("current " + currentFilm + "nextfilm" + nextfilm);
+
+            currentFilm += 5;
+                nextfilm += 5;
+           
+            return RedirectToAction("Index", "Film");
+        }
+        #endregion
         public IActionResult Index()
         {
+            
+            LoadFilmFromAPI(currentFilm, nextfilm);
             return View(FilmModel);
         }
 

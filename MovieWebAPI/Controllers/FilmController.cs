@@ -51,6 +51,7 @@ namespace MovieWebAPI.Controllers
         [Route("page")]
         public ActionResult GetPageOfFilmDTOOrderByTitle(int index, int nbbypage)
         {
+            Console.WriteLine("index =" + index);
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetPageOfFilmDTOOrderByTitle(index, nbbypage);
             if (ret != null)

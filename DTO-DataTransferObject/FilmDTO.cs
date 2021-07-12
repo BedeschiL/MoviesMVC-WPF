@@ -19,11 +19,11 @@ namespace DTO_DataTransferObject
 		public virtual float VoteAverage { get { return _voteAverage; } set { _voteAverage = value; } }
 		public virtual int Runtime { get { return _runtime; } set { _runtime = value; } }
 		public virtual string Posterpath { get { return _posterpath; } set { _posterpath = value; } }
-		public List<CommentDTO> Comments { get; set; }
+		public ICollection<CommentDTO> Comments { get; set; }
 		public FilmDTO()
 		{
 		}
-		public FilmDTO(int id, string title, DateTime rd, float va, int rt, string pp, List<CommentDTO> comments)
+		public FilmDTO(int id, string title, DateTime rd, float va, int rt, string pp, ICollection<CommentDTO> comments)
 		{
 			Id = id;
 			Title = title;
@@ -31,6 +31,7 @@ namespace DTO_DataTransferObject
 			VoteAverage = va;
 			Runtime = rt;
 			Posterpath = pp;
+			Comments = comments;
 		}
 	}
 }

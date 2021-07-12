@@ -52,6 +52,7 @@ namespace DTO_DataTransferObject
         public ICollection<FilmTypeDTO> TypesDTO { get; set; } = new List<FilmTypeDTO>();
         public ICollection<CommentDTO> CommentsDTO { get; set; } = new List<CommentDTO>();
 
+        override
         public String ToString()
         {
 
@@ -59,6 +60,10 @@ namespace DTO_DataTransferObject
             foreach (FilmTypeDTO t in this.TypesDTO)
             {
                 Console.WriteLine(t.Name);
+            }
+            foreach (CommentDTO c in this.CommentsDTO)
+            {
+                Console.WriteLine(c.Content);
             }
             return temp;
         }

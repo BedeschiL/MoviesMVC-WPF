@@ -23,7 +23,10 @@ namespace DAL_DataAcessLayer.Parser
             for (int i = 0; i < NbFilmToLoad; i++)
             {
                 var line = f.ReadLine();
-                if (line == null) ;
+                if (line == null)
+                {
+
+                }
                 else
                 {
                     //Console.WriteLine("----------------------------\n Nouveau film !!! \n");
