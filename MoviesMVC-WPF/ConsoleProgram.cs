@@ -19,10 +19,9 @@ namespace MoviesMVC_WPF
             DALmanager dal = new DALmanager();
             //CREATION DB
             
-           /* string movieFilePath = "C:\\movie\\movie.txt";
+            string movieFilePath = @"C:\Users\Hector\source\repos\BedeschiL\MoviesMVC-WPF\DataBase\movies_v2.txt";
             fp.LoadTextFileInDB(movieFilePath,500);
             //------------------------
-          */
             
             //TEST BLL 
             BLLmanager BLLmanager = new BLLmanager();

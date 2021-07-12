@@ -12,7 +12,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,19 +21,23 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         
-        <Label Content="Titre :" HorizontalAlignment="Center"/>
-        <Label Content="Date :" HorizontalAlignment="Center" Grid.Row="1"/>
-        <Label Content="VoteAverage :" HorizontalAlignment="Center" Grid.Row="2"/>
-        <Label Content="Runtime :" HorizontalAlignment="Center" Grid.Row="3"/>
-        <Label Content="Types :" HorizontalAlignment="Center" Grid.Row="4"/>
+        <Label Content="Titre :" HorizontalAlignment="Right"/>
+        <Label Content="Date :" HorizontalAlignment="Right" Grid.Row="1"/>
+        <Label Content="Côte :" HorizontalAlignment="Right" Grid.Row="2"/>
+        <Label Content="Runtime :" HorizontalAlignment="Right" Grid.Row="3"/>
+        <Label Content="Types :" HorizontalAlignment="Right" Grid.Row="4"/>
         <Label x:Name="tt" Content="{Binding Title}" Grid.Column="1" Height="30" Width="300"/>
         <Label x:Name="dt" Content="{Binding Date}" Grid.Column="1" Grid.Row="1" Height="30" Width="300"/>
         <Label x:Name="va" Content="{Binding VoteAverage}" Grid.Column="1" Grid.Row="2" Height="30" Width="300"/>
         <Label x:Name="rt" Content="{Binding ReadableRuntime}" Grid.Column="1" Grid.Row="3" Height="30" Width="300"/>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
-            <Image Width="30" Height="30" Source="{Binding TypeIcons[0]}"/>
+            <Image Width="60" Height="60" Source="{Binding TypeIcons[0]}"/>
+            <Image Width="60" Height="60" Source="{Binding TypeIcons[1]}"/>
+            <Image Width="60" Height="60" Source="{Binding TypeIcons[2]}"/>
+            <Image Width="60" Height="60" Source="{Binding TypeIcons[3]}"/>
+            <Image Width="60" Height="60" Source="{Binding TypeIcons[4]}"/>
         </StackPanel>
-        <Label Content="Acteurs :" HorizontalAlignment="Center" Grid.Row="5"/>
+        <Label Content="Acteurs :" HorizontalAlignment="Right" Grid.Row="5"/>
         <DataGrid x:Name="dtActors" Grid.Column="1" Grid.Row="5" Margin="10,10,10,10" AutoGenerateColumns="false" ItemsSource="{Binding ActorsDTO}" IsReadOnly="true" BorderBrush="#FF2D557C">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Surname}" />

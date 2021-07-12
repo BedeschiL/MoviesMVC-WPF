@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DAL-DataAcessLayer\DAL-DataAcessLayer.csproj" />
     <ProjectReference Include="..\DTO-DataTransferObject\DTO-DataTransferObject.csproj" />
+    <ProjectReference Include="..\Movies-Utils\Movies-Utils.csproj" />
   </ItemGroup>
 
 </Project>

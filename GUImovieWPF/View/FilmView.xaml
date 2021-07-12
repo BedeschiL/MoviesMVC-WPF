@@ -28,12 +28,12 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <Image Source="{Binding Poster}"/>
+                                <Image Height="125" Source="{Binding Poster}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn x:Name="titre" Header="Titre" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Titre" Binding="{Binding Title}"/>
                 <DataGridTextColumn Header="Durée" Binding="{Binding ReadableRuntime}" />
                 <DataGridTemplateColumn x:Name="Image" Header="Genre">
                     <DataGridTemplateColumn.CellTemplate>
