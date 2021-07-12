@@ -3,6 +3,7 @@ using DAL_DataAcessLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -21,11 +22,14 @@ namespace DAL_DataAcessLayer.Managers
         #endregion
         public Film SelectFilmWithId(int IDF)
         {
+            
+           
             return movC.Films.Include("Actors").Include("Types").Include("Comments").FirstOrDefault(f => f.Id == IDF);
         }
 
         public IQueryable<Film> GetPageOfFilmOrderByTitle(int index, int numberbypage)
         {
+            Trace.WriteLine("index =" + index);
             return movC.Films.Include("Comments").OrderBy(f => f.Title).Skip(index).Take(numberbypage);
         }
 

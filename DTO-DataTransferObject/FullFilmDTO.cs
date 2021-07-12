@@ -61,6 +61,10 @@ namespace DTO_DataTransferObject
             {
                 Console.WriteLine(t.Name);
             }
+            foreach (CommentDTO c in this.CommentsDTO)
+            {
+                Console.WriteLine(c.Content);
+            }
             return temp;
         }
     }

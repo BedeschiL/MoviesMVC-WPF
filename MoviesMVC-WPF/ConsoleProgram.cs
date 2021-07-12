@@ -19,13 +19,14 @@ namespace MoviesMVC_WPF
             DALmanager dal = new DALmanager();
             //CREATION DB
             
-            string movieFilePath = "C:\\movie\\movie.txt";
+           /* string movieFilePath = "C:\\movie\\movie.txt";
             fp.LoadTextFileInDB(movieFilePath,500);
             //------------------------
-          /*
+          */
             
             //TEST BLL 
             BLLmanager BLLmanager = new BLLmanager();
+            /*
             /////////////////////////////////////////////////TEST FILM TYPES BY ID
             ICollection<FilmTypeDTO> tempFilmTypeDTO = BLLmanager.GetListFilmTypesByIdFilm(2);
             Console.WriteLine("Genre : \n");
@@ -53,17 +54,31 @@ namespace MoviesMVC_WPF
             foreach (ActorDTO t in tempActDTOFavoAct)
             {
                 Console.WriteLine(t.Name + t.Surname);
-            }
+            }*/
             /////////////////////////////////////////////////TEST GetFullFilmDetailsByIdFilm
+            ///
+          
             Console.WriteLine("Get fullfilmd etail : \n");
-            FullFilmDTO fullFilmDTOs = BLLmanager.GetFullFilmDetailsByIdFilm(2);
+            FullFilmDTO fullFilmDTOs = BLLmanager.GetFullFilmDetailsByIdFilm(389);
             Console.WriteLine(fullFilmDTOs.ToString());
+
+
+            Console.WriteLine("Get NBBYPAGE  : \n");
+            List<FilmDTO> fdto = BLLmanager.GetPageOfFilmDTOOrderByTitle(0,5);
+            Console.WriteLine("nb film" + fdto.Count);
+            foreach(FilmDTO f in fdto)
+            {
+                Console.WriteLine("COUNT COMMENT " + f.Comments.Count);
+            }
+
             /////////////////////////////////////////////////TEST InsertComment
-            Console.WriteLine("Insert Comment : \n");
-            CommentDTO c = new CommentDTO("Bien", 5,"Louis",DateTime.Now);
-            BLLmanager.InsertCommentOnFilmId(3, c);
-            Console.WriteLine(fullFilmDTOs.ToString());
-          */
+
+            /*
+               Console.WriteLine("Insert Comment : \n");
+               CommentDTO c = new CommentDTO("Bien", 5,"Louis",DateTime.Now);
+               BLLmanager.InsertCommentOnFilmId(389, c);*/
+
+
             Console.WriteLine("SORTIE DU PROGR!");
             Console.ReadKey();
         }
