@@ -33,6 +33,7 @@ namespace GUImovieWPF.Model
             VoteAverage = f.VoteAverage;
             Runtime = f.Runtime;
             Posterpath = f.Posterpath;
+            Comments = f.Comments;
         }
 
         private BitmapImage GetRating()

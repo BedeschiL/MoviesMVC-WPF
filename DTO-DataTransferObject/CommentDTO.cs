@@ -11,7 +11,6 @@ namespace DTO_DataTransferObject
 		public string Content { get; set; }//Content ?
 		public int Rate { get; set; }//de 1 à 5
 		public string Username { get; set; }
-	
 		public DateTime Date { get; set; }
 		public Film Film { get; set; } //one to many avec film
 

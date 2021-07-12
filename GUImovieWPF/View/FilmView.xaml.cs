@@ -29,7 +29,7 @@ namespace GUImovieWPF.View
 
         private void recherche_Click(object sender, RoutedEventArgs e)
         {
-
+            ((FilmViewModel)DataContext).SearchFilms(rstr.Text);
         }
 
         private void prev_Click(object sender, RoutedEventArgs e)

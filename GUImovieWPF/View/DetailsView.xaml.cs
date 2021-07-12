@@ -25,10 +25,12 @@ namespace GUImovieWPF.View
     /// </summary>
     public partial class DetailsView : Window
     {
-        private FullFilmDTO ffGlob;
+        private FullFilmModel SelectedFilm { get; set; }
         public DetailsView()
         {
             InitializeComponent();
+            SelectedFilm = new FullFilmModel(new FullFilmDTO());
+            DataContext = SelectedFilm;
         }
 
         public DetailsView(int id)
@@ -47,30 +49,15 @@ namespace GUImovieWPF.View
             Trace.WriteLine(route);
 
             HttpResponseMessage reponse = client.GetAsync(route).Result;
-            Trace.WriteLine(reponse.Content.ReadAsStringAsync());
+            Trace.WriteLine(reponse.Content.ReadAsStringAsync().Result);
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-            FullFilmDTO fullFilm = JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options);
+            SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options));
 
-            tt.Text = fullFilm.Title;
-            dt.Text = fullFilm.Date.ToString();
-            rt.Text = fullFilm.Runtime.ToString();
-            va.Text = fullFilm.VoteAverage.ToString();
-            com.Text = fullFilm.CommentsDTO.Count > 0 ? fullFilm.CommentsDTO.ElementAt(0).Content : "Pas de commentaire pour ce film";
-
-            foreach (ActorDTO a in fullFilm.ActorsDTO)
-            {
-                actors.Items.Add(a.Name);
-            }
-            ffGlob = fullFilm;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = SelectedFilm;
         }
     }
 }

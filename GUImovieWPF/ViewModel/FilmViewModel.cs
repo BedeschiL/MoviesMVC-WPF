@@ -28,6 +28,48 @@ namespace GUImovieWPF.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public bool SearchFilms(string query)
+        {
+            //PREPARATION APPEL API
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
+            };
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string route = string.Format("{0}movie/title?name={1}&index={2}&nbbypage=5", ConfigurationManager.AppSettings["basicURL"], query, 0);
+            Trace.WriteLine(route);
+
+            HttpResponseMessage reponse = client.GetAsync(route).Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                return false;
+            }
+
+            Trace.WriteLine(reponse.Content.ReadAsStringAsync().Result);
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            List<FilmDTO> lf = JsonSerializer.Deserialize<List<FilmDTO>>(reponse.Content.ReadAsStringAsync().Result, options);
+
+            if (Films == null)
+            {
+                Films = new ObservableCollection<FilmModel>();
+            }
+            else
+            {
+                Films.Clear();
+            }
+
+            foreach (FilmDTO f in lf)
+            {
+                Trace.WriteLine(f.VoteAverage);
+                Films.Add(new FilmModel(f));
+            }
+
+            return true;
+        }
+
         public bool LoadFilms()
         {
             //PREPARATION APPEL API
@@ -36,7 +78,7 @@ namespace GUImovieWPF.ViewModel
                 BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
             };
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string route = ConfigurationManager.AppSettings["basicURL"] + "movie/page?index=#index#&nbbypage=5".Replace("#index#", ((Page - 1) * 5).ToString());
+            string route = string.Format("{0}movie/page?index={1}&nbbypage=5", ConfigurationManager.AppSettings["basicURL"], (Page - 1) * 5);
             Trace.WriteLine(route);
 
             HttpResponseMessage reponse = client.GetAsync(route).Result;

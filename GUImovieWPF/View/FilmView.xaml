@@ -39,17 +39,16 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Image Width="60" Height="60" Source="{Binding GenreImage[0]}"/>
-                                <Image Width="60" Height="60" Source="{Binding GenreImage[1]}"/>
-                                <Image Width="60" Height="60" Source="{Binding GenreImage[2]}"/>
-                                <Image Width="60" Height="60" Source="{Binding GenreImage[3]}"/>
-                                <Image Width="60" Height="60" Source="{Binding GenreImage[4]}"/>
-
+                                <Image Width="60" Height="60" Source="{Binding TypeIcons[0]}"/>
+                                <Image Width="60" Height="60" Source="{Binding TypeIcons[1]}"/>
+                                <Image Width="60" Height="60" Source="{Binding TypeIcons[2]}"/>
+                                <Image Width="60" Height="60" Source="{Binding TypeIcons[3]}"/>
+                                <Image Width="60" Height="60" Source="{Binding TypeIcons[4]}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Côte" x:Name="rate" >
+                <DataGridTemplateColumn Header="Côte" x:Name="rating" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
