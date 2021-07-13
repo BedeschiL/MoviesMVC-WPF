@@ -16,14 +16,17 @@ namespace MoviesMVC_WPF
         static void Main(string[] args)
         {
             FileParser fp = new FileParser();
+            BLLmanager bll = new BLLmanager();
             DALmanager dal = new DALmanager();
+            List<FilmDTO> tempActDTO = bll.GetPageOfFilmDTOOrderByTitle(0, 5);
+            Console.WriteLine(tempActDTO.Count());
             //CREATION DB
-            
-           /* string movieFilePath = "C:\\movie\\movie.txt";
-            fp.LoadTextFileInDB(movieFilePath,500);
-            //------------------------
-          */
-            
+
+            /* string movieFilePath = "C:\\movie\\movie.txt";
+             fp.LoadTextFileInDB(movieFilePath,500);
+             //------------------------
+           */
+
             //TEST BLL 
             BLLmanager BLLmanager = new BLLmanager();
             /*
@@ -57,7 +60,7 @@ namespace MoviesMVC_WPF
             }*/
             /////////////////////////////////////////////////TEST GetFullFilmDetailsByIdFilm
             ///
-          
+          /*
             Console.WriteLine("Get fullfilmd etail : \n");
             FullFilmDTO fullFilmDTOs = BLLmanager.GetFullFilmDetailsByIdFilm(389);
             Console.WriteLine(fullFilmDTOs.ToString());
@@ -70,7 +73,7 @@ namespace MoviesMVC_WPF
             {
                 Console.WriteLine("COUNT COMMENT " + f.Comments.Count);
             }
-
+          */
             /////////////////////////////////////////////////TEST InsertComment
 
             /*

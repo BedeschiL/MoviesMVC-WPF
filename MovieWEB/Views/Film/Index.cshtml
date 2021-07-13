@@ -25,12 +25,21 @@
                 <td>
                     <img src="@item.Posterpath" width="100" />
                 </td>
-               
+
                 <td>@item.Title</td>
                 <td>@item.runtimeToString</td>
-                <td>@item.VoteAverage</td>
+                @{
+                if(item.VoteAverage==0)
+                {
+                    <td>Aucun vote</td>
+                }
+                else
+                {
+                    <td>@item.VoteAverage</td>
+                }
+                }
                 <td>
-                    @Html.ActionLink("Details", "Details", "Film", new { ID = item.Id });
+                    @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id });
                 </td>
             </tr>
             }

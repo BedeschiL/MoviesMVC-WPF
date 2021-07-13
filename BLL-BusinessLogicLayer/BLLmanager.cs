@@ -220,13 +220,27 @@ namespace BLL_BusinessLogicLayer
         public float voteAverageCalculator(Film f)
         {
             int countComment = f.Comments.Count;
-            float voteAverage=0;
-            foreach(Comment c in f.Comments)
+            if(countComment==0)
             {
-                voteAverage = voteAverage + c.Rate;
+                
+                float float0 = 0.0f;
+                return float0;
+
             }
-            float final = voteAverage / (float)countComment;
-            return (float) Math.Round(final,2);
+            else
+            {
+               
+                float voteAverage = 0f;
+                foreach (Comment c in f.Comments)
+                {
+                    voteAverage = voteAverage + c.Rate;
+                }
+                float final = voteAverage / (float)countComment;
+                return (float)Math.Round(final, 2);
+            }
+           
+          
+          
         }
         #endregion
     }

@@ -29,7 +29,7 @@ namespace DAL_DataAcessLayer.Managers
 
         public IQueryable<Film> GetPageOfFilmOrderByTitle(int index, int numberbypage)
         {
-            Trace.WriteLine("index =" + index);
+           
             return movC.Films.Include("Comments").OrderBy(f => f.Title).Skip(index).Take(numberbypage);
         }
 

@@ -27,49 +27,45 @@ namespace MovieWEB.Controllers
             _logger = logger;
 		}
         private void LoadFilmFromAPI(int index, int nbbypage)
-        {
-            Trace.WriteLine("\n\nLoadFilmFromapi current " + currentFilm + "nextfilm" + nextfilm);
-            Trace.WriteLine("\n\nCOUNT LIST FILM "+ FilmModel.Films.Count);
-            
-          
+        {   
             string querytype = "page";
             string query = "?index=" + index + "&nbbypage=" + nbbypage;
-
             using (var client = new WebClient())
             {
                 //Get a string representation of the Json
                 String finalQuery = (ConfigurationManager.AppSettings["basicUrl"] + querytype + query);
                 String rawJson = client.DownloadString(finalQuery);
-
                 List<FilmDTO> lf = JsonConvert.DeserializeObject<List<FilmDTO>>(rawJson);
                 foreach(FilmDTO f in lf)
                 {
                     FilmModel.Films.Add(new FilmUiModel(f));
                 }
-               
-
-
             }
         }
         #region Boutton
         [Route("FilmController/BouttonPrevious")]
         public IActionResult BouttonPrevious()
         {
-            Trace.WriteLine("BouttonPrevious\n");
-            Trace.WriteLine("current " + currentFilm +"nextfilm" + nextfilm);
-            currentFilm -= 5;
-                nextfilm -= 5;
+           if(currentFilm==0)
+            {
+
+            }
+           else
+            {
+                currentFilm -= 5;
+            }
+           
+          
             
             return RedirectToAction("Index", "Film");
         }
         [Route("FilmController/BouttonNext")]
         public IActionResult BouttonNext()
         {
-            Trace.WriteLine("Boutton next\n");
-            Trace.WriteLine("current " + currentFilm + "nextfilm" + nextfilm);
+          
 
             currentFilm += 5;
-                nextfilm += 5;
+             
            
             return RedirectToAction("Index", "Film");
         }
