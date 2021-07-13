@@ -55,8 +55,8 @@ namespace GUImovieWPF.View
             {
                 PropertyNameCaseInsensitive = true
             };
-            SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options));
-            //SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result.Replace("\"NaN\"", "0"), options));
+            //SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options));
+            SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result.Replace("\"NaN\"", "0"), options));
 
             DataContext = SelectedFilm;
         }
