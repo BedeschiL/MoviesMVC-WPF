@@ -29,29 +29,23 @@ namespace GUImovieWPF.View
 
         private void recherche_Click(object sender, RoutedEventArgs e)
         {
-
+            ((FilmViewModel)DataContext).Page = 1;
+            ((FilmViewModel)DataContext).Query = rstr.Text;
+            ((FilmViewModel)DataContext).LoadFilms();
         }
 
         private void prev_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Clicked prev");
             ((FilmViewModel)DataContext).Page--;
-            if (((FilmViewModel)DataContext).LoadFilms() != true)
-            {
-                Trace.WriteLine("Bad");
-                ((FilmViewModel)DataContext).Page++;
-            }
+            ((FilmViewModel)DataContext).LoadFilms();
         }
 
         private void next_Click(object sender, RoutedEventArgs e)
         {
             Trace.WriteLine("Clicked next");
             ((FilmViewModel)DataContext).Page++;
-            if (((FilmViewModel)DataContext).LoadFilms() != true)
-            {
-                Trace.WriteLine("Bad");
-                ((FilmViewModel)DataContext).Page--;
-            }
+            ((FilmViewModel)DataContext).LoadFilms();
         }
 
         private void details_Click(object sender, RoutedEventArgs e)

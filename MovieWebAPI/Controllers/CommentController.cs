@@ -19,14 +19,7 @@ namespace MovieWebAPI.Controllers
             BLLmanager bllm = new BLLmanager();
             CommentDTO comment = new CommentDTO(content,rate,username);
             var ret = bllm.InsertCommentOnFilmId(idFilm, comment);
-            if (ret == true)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return ret == true ? Ok(ret) : (ActionResult)NotFound();
         }
     }
 }

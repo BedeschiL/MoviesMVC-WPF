@@ -14,12 +14,15 @@ namespace GUImovieWPF.ViewModel
 {
     class FilmViewModel : INotifyPropertyChanged
     {
-        private int _page = 1;
+        private int _page;
         public int Page { get { return _page; } set { _page = value; OnPropertyChanged("Page"); } }
+        public string Query { get; set; }
         public ObservableCollection<FilmModel> Films { get; set; }
 
         public FilmViewModel()
         {
+            Page = 1;
+            Query = "";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,13 +33,21 @@ namespace GUImovieWPF.ViewModel
 
         public bool LoadFilms()
         {
+            if (Page < 1)
+            {
+                Page = 1;
+                return false;
+            }
             //PREPARATION APPEL API
             HttpClient client = new HttpClient
             {
                 BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
             };
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string route = ConfigurationManager.AppSettings["basicURL"] + "movie/page?index=#index#&nbbypage=5".Replace("#index#", ((Page - 1) * 5).ToString());
+
+            string route = Query != ""
+                ? string.Format("{0}movie/title?name={1}&index={2}&nbbypage=5", ConfigurationManager.AppSettings["basicURL"], Query, (Page - 1) * 5)
+                : string.Format("{0}movie/page?index={1}&nbbypage=5", ConfigurationManager.AppSettings["basicURL"], (Page - 1) * 5);
             Trace.WriteLine(route);
 
             HttpResponseMessage reponse = client.GetAsync(route).Result;
@@ -50,7 +61,8 @@ namespace GUImovieWPF.ViewModel
             {
                 PropertyNameCaseInsensitive = true
             };
-            List<FilmDTO> lf = JsonSerializer.Deserialize<List<FilmDTO>>(reponse.Content.ReadAsStringAsync().Result, options);
+            //List<FilmDTO> lf = JsonSerializer.Deserialize<List<FilmDTO>>(reponse.Content.ReadAsStringAsync().Result, options);
+            List<FilmDTO> lf = JsonSerializer.Deserialize<List<FilmDTO>>(reponse.Content.ReadAsStringAsync().Result.Replace("\"NaN\"", "0"), options);
 
             if (Films == null)
             {

@@ -17,15 +17,8 @@ namespace MovieWebAPI.Controllers
         {
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetListActorsByIdFilm(idMovie);
-            if(ret!=null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
-           
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
+
         }
         [HttpGet]
         [Route("favorite")]
@@ -33,14 +26,7 @@ namespace MovieWebAPI.Controllers
         {
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetFavoriteActors(nbFilm);
-            if (ret != null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
     }

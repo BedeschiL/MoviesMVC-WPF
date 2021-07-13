@@ -25,10 +25,12 @@ namespace GUImovieWPF.View
     /// </summary>
     public partial class DetailsView : Window
     {
-        private FullFilmDTO ffGlob;
+        private FullFilmModel SelectedFilm { get; set; }
         public DetailsView()
         {
             InitializeComponent();
+            SelectedFilm = new FullFilmModel(new FullFilmDTO());
+            DataContext = SelectedFilm;
         }
 
         public DetailsView(int id)
@@ -43,34 +45,35 @@ namespace GUImovieWPF.View
                 BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
             };
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string route = ConfigurationManager.AppSettings["basicURL"] + "movie/details?idF=#id#".Replace("#id#", id.ToString());
+            string route = string.Format("{0}movie/details?idF={1}", ConfigurationManager.AppSettings["basicURL"], id);
             Trace.WriteLine(route);
 
             HttpResponseMessage reponse = client.GetAsync(route).Result;
-            Trace.WriteLine(reponse.Content.ReadAsStringAsync());
+            Trace.WriteLine(reponse.Content.ReadAsStringAsync().Result);
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-            FullFilmDTO fullFilm = JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options);
+            //SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options));
+            SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result.Replace("\"NaN\"", "0"), options));
 
-            tt.Text = fullFilm.Title;
-            dt.Text = fullFilm.Date.ToString();
-            rt.Text = fullFilm.Runtime.ToString();
-            va.Text = fullFilm.VoteAverage.ToString();
-            com.Text = fullFilm.CommentsDTO.Count > 0 ? fullFilm.CommentsDTO.ElementAt(0).Content : "Pas de commentaire pour ce film";
-
-            foreach (ActorDTO a in fullFilm.ActorsDTO)
-            {
-                actors.Items.Add(a.Name);
-            }
-            ffGlob = fullFilm;
+            DataContext = SelectedFilm;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void post_Click(object sender, RoutedEventArgs e)
         {
+            //PREPARATION APPEL API
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
+            };
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string route = string.Format("{0}comment?idFilm={1}&content={2}&rate={3}&username={4}", ConfigurationManager.AppSettings["basicURL"], SelectedFilm.Id, content.Text, rate.Text, username.Text);
+            Trace.WriteLine(route);
 
+            HttpResponseMessage reponse = client.GetAsync(route).Result;
+            Trace.WriteLine(reponse.Content.ReadAsStringAsync().Result);
         }
     }
 }

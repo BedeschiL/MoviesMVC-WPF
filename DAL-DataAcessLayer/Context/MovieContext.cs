@@ -15,15 +15,14 @@ namespace DAL_DataAcessLayer.Context
 
         public MovieContext()
         {
-            this.Database.EnsureCreated();
-           
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder
             .EnableSensitiveDataLogging()
         //.UseSqlite(@"Data source = " + Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"..\\..\\..\\..\\DataBase\\movie.db")));
-        .UseSqlite(@"Data source = C:\\movie\\movie.db");
+        .UseSqlite(@"Data source = C:\Users\Hector\source\repos\BedeschiL\MoviesMVC-WPF\DataBase\movie.db");
 
     }
 }

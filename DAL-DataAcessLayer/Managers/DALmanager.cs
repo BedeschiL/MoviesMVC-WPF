@@ -22,8 +22,6 @@ namespace DAL_DataAcessLayer.Managers
         #endregion
         public Film SelectFilmWithId(int IDF)
         {
-            
-           
             return movC.Films.Include("Actors").Include("Types").Include("Comments").FirstOrDefault(f => f.Id == IDF);
         }
 
@@ -38,7 +36,7 @@ namespace DAL_DataAcessLayer.Managers
             return movC.Films.Include("Comments").OrderBy(f => f.Title).Where(f => f.Title.ToLower().Contains(name.ToLower())).Skip(index).Take(numberbypage);
         }
 
-        public IQueryable<Actor> SelectActorWithName(String name)
+        public IQueryable<Actor> SelectActorWithName(string name)
         {
             return movC.Actors.Include("Films").Where(a => a.Name.ToLower().Contains(name.ToLower()));
         }
