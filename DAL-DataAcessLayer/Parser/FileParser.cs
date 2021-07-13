@@ -23,11 +23,7 @@ namespace DAL_DataAcessLayer.Parser
             for (int i = 0; i < NbFilmToLoad; i++)
             {
                 var line = f.ReadLine();
-                if (line == null)
-                {
-
-                }
-                else
+                if (line != null)
                 {
                     //Console.WriteLine("----------------------------\n Nouveau film !!! \n");
                     Char[] delimiterChars = { '\u2023' };
@@ -36,7 +32,7 @@ namespace DAL_DataAcessLayer.Parser
                     Film film = new Film();
 
                     //Console.WriteLine("f.Id "+ Int32.Parse(filmdetailwords[0]));
-                    film.Id = Int32.Parse(filmdetailwords[0], 0);
+                    film.Id = int.Parse(filmdetailwords[0], 0);
                     Console.WriteLine("N°Ligne : " + i + "f.Title " + filmdetailwords[1]);
                     film.Title = filmdetailwords[1];
                     //Console.WriteLine("f.Date " + filmdetailwords[3]);
@@ -46,9 +42,11 @@ namespace DAL_DataAcessLayer.Parser
                     }
                     catch (System.FormatException) { };
                     //Console.WriteLine("f.Runtime " + Int32.Parse(filmdetailwords[7]));
-                    film.Runtime = Int32.Parse(filmdetailwords[7], 0);
+                    film.Runtime = int.Parse(filmdetailwords[7], 0);
                     //Console.WriteLine("f.Posterpath " + filmdetailwords[9]);
                     film.Posterpath = filmdetailwords[9];
+
+                    film.VoteAverage = 0;
 
                     delimiterChars[0] = '\u2016';
                     if (filmdetailwords.Length == 15)
@@ -66,7 +64,7 @@ namespace DAL_DataAcessLayer.Parser
                                 {
                                     //Console.WriteLine("Ajout type de film : " + filmtype);
                                     TempLTypeFilm.Add(filmtype);
-                                    film.Types.Add(TempLTypeFilm[TempLTypeFilm.Count - 1]);
+                                    film.Types.Add(TempLTypeFilm[^1]);
                                 }
                                 else
                                 {
@@ -89,7 +87,7 @@ namespace DAL_DataAcessLayer.Parser
                                 {
                                     //Console.WriteLine("Ajout d'un acteur : " + acteur);
                                     TempLActor.Add(acteur);
-                                    film.Actors.Add(TempLActor[TempLActor.Count - 1]);
+                                    film.Actors.Add(TempLActor[^1]);
                                 }
                                 else
                                 {

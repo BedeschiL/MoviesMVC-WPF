@@ -45,7 +45,7 @@ namespace GUImovieWPF.View
                 BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
             };
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string route = ConfigurationManager.AppSettings["basicURL"] + "movie/details?idF=#id#".Replace("#id#", id.ToString());
+            string route = string.Format("{0}movie/details?idF={1}", ConfigurationManager.AppSettings["basicURL"], id);
             Trace.WriteLine(route);
 
             HttpResponseMessage reponse = client.GetAsync(route).Result;
@@ -56,8 +56,24 @@ namespace GUImovieWPF.View
                 PropertyNameCaseInsensitive = true
             };
             SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result, options));
+            //SelectedFilm = new FullFilmModel(JsonSerializer.Deserialize<FullFilmDTO>(reponse.Content.ReadAsStringAsync().Result.Replace("\"NaN\"", "0"), options));
 
             DataContext = SelectedFilm;
+        }
+
+        private void post_Click(object sender, RoutedEventArgs e)
+        {
+            //PREPARATION APPEL API
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri(ConfigurationManager.AppSettings["basicURL"])
+            };
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string route = string.Format("{0}comment?idFilm={1}&content={2}&rate={3}&username={4}", ConfigurationManager.AppSettings["basicURL"], SelectedFilm.Id, content.Text, rate.Text, username.Text);
+            Trace.WriteLine(route);
+
+            HttpResponseMessage reponse = client.GetAsync(route).Result;
+            Trace.WriteLine(reponse.Content.ReadAsStringAsync().Result);
         }
     }
 }

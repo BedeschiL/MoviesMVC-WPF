@@ -21,14 +21,7 @@ namespace MovieWebAPI.Controllers
         {
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetFullFilmDetailsByIdFilm(idF);
-                if(ret!=null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
         }
         #endregion
         [HttpGet]
@@ -37,14 +30,7 @@ namespace MovieWebAPI.Controllers
         {
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetFilmListWithName(name, index, nbbypage);
-            if (ret != null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
         [HttpGet]
@@ -54,14 +40,7 @@ namespace MovieWebAPI.Controllers
             Console.WriteLine("index =" + index);
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetPageOfFilmDTOOrderByTitle(index, nbbypage);
-            if (ret != null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
 
@@ -72,15 +51,8 @@ namespace MovieWebAPI.Controllers
         {
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.FindListFilmByPartialActorName(name, max);
-            if (ret != null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
-           
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
+
         }
         #endregion
    

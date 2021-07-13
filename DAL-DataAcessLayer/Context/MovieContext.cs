@@ -15,8 +15,7 @@ namespace DAL_DataAcessLayer.Context
 
         public MovieContext()
         {
-            this.Database.EnsureCreated();
-           
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

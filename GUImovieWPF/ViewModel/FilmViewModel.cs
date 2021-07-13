@@ -62,6 +62,7 @@ namespace GUImovieWPF.ViewModel
                 PropertyNameCaseInsensitive = true
             };
             List<FilmDTO> lf = JsonSerializer.Deserialize<List<FilmDTO>>(reponse.Content.ReadAsStringAsync().Result, options);
+            //List<FilmDTO> lf = JsonSerializer.Deserialize<List<FilmDTO>>(reponse.Content.ReadAsStringAsync().Result.Replace("\"NaN\"", "0"), options);
 
             if (Films == null)
             {

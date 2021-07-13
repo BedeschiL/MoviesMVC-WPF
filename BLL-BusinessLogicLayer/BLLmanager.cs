@@ -22,9 +22,7 @@ namespace BLL_BusinessLogicLayer
         public ICollection<LightActorDTO> GetListActorsByIdFilm(int id)
         {
             ICollection<LightActorDTO> retFoncActor = new List<LightActorDTO>();
-            Film retFilm = new Film();
-           
-            retFilm = dalManager.SelectFilmWithId(id);
+            Film retFilm = dalManager.SelectFilmWithId(id);
             if (retFilm != null)
             {
                
@@ -61,8 +59,7 @@ namespace BLL_BusinessLogicLayer
         public ICollection<FilmTypeDTO> GetListFilmTypesByIdFilm(int id)
         {
             ICollection<FilmTypeDTO> retFoncTypes = new List<FilmTypeDTO>();
-            Film retFilm = new Film();
-            retFilm = dalManager.SelectFilmWithId(id);
+            Film retFilm = dalManager.SelectFilmWithId(id);
             if (retFilm != null)
             {
                 
@@ -78,7 +75,7 @@ namespace BLL_BusinessLogicLayer
         #endregion
         //Film
         #region FindListFilmByPartialActorName
-        public List<FilmDTO> FindListFilmByPartialActorName(String name, int maxFilm)
+        public List<FilmDTO> FindListFilmByPartialActorName(string name, int maxFilm)
         {
             var listactor = dalManager.SelectActorWithName(name);
 
@@ -178,7 +175,7 @@ namespace BLL_BusinessLogicLayer
                 }
                 ListFilm.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
             }
-            return (ListFilm);
+            return ListFilm;
         }
         #endregion
 
@@ -199,13 +196,13 @@ namespace BLL_BusinessLogicLayer
         public float VoteAverageCalculator(Film f)
         {
             int countComment = f.Comments.Count;
-            float voteAverage=0;
+            float voteAverage = 0;
             foreach(Comment c in f.Comments)
             {
-                voteAverage = voteAverage + c.Rate;
+                voteAverage += c.Rate;
             }
-            float final = voteAverage / (float)countComment;
-            return (float) Math.Round(final,2);
+            float final = voteAverage / countComment;
+            return (float)Math.Round(final, 2);
         }
         #endregion
     }

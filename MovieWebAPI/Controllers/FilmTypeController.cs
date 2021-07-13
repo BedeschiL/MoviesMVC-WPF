@@ -18,23 +18,7 @@ namespace MovieWebAPI.Controllers
         {
             BLLmanager bllm = new BLLmanager();
             var ret = bllm.GetListFilmTypesByIdFilm(idMovie);
-            if (ret != null)
-            {
-                return Ok(ret);
-            }
-            else
-            {
-                return NotFound();
-            }
-
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
         }
-
-
-
-
-
-
-
-
     }
 }
