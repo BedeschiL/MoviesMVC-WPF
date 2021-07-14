@@ -26,18 +26,14 @@ namespace MovieWEB.Controllers
         {
             _logger = logger;
         }
-
-        public IActionResult ActorDetail(string test )
+        public IActionResult ActorDetail(string id)
         {
-           
-
             ActeurUImodel acm = new ActeurUImodel();
 
             using (var client = new WebClient())
             {
-              
                 //Get a string representation of the Json
-                string route = ConfigurationManager.AppSettings["apiActeur"] + test + ConfigurationManager.AppSettings["apiKey"];
+                string route = ConfigurationManager.AppSettings["apiActeur"] + id + ConfigurationManager.AppSettings["apiKey"];
                 String rawJson = client.DownloadString(route);
                 var data = (JObject)JsonConvert.DeserializeObject(rawJson);
                 acm.Name = data["name"].Value<string>();
@@ -45,13 +41,9 @@ namespace MovieWEB.Controllers
                 acm.birthplace = data["place_of_birth"].Value<string>();
                 acm.birthday = data["birthday"].Value<string>();
                 var tempToken = data["also_known_as"] as JArray;
-
+                acm.avatar = ConfigurationManager.AppSettings["apiActeurPic"] + data["profile_path"].Value<string>();
             }
-
-            
-          
-
-                string query = "actors?name="+acm.Name+"&max=20";
+                string query = "actorsId?id=" + int.Parse(id);
                 using (var client = new WebClient())
                 {
                     //Get a string representation of the Json
@@ -60,16 +52,10 @@ namespace MovieWEB.Controllers
                     List<FilmDTO> temDTO = JsonConvert.DeserializeObject<List<FilmDTO>>(rawJson);
                     acm.Films = temDTO;
                     Console.WriteLine("countFilm" + temDTO.Count);
-                Trace.WriteLine("countFilm" + temDTO.Count);
-            }
-
-              
-            
-          
+                    Trace.WriteLine("countFilm" + temDTO.Count);
+                }
             return View(acm);
-        }
-
-       
+        }  
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

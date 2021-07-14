@@ -22,7 +22,7 @@ namespace DAL_DataAcessLayer.Context
             => optionsBuilder
             .EnableSensitiveDataLogging()
         //.UseSqlite(@"Data source = " + Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"..\\..\\..\\..\\DataBase\\movie.db")));
-        .UseSqlite(@"Data source = C:\Users\Hector\source\repos\BedeschiL\MoviesMVC-WPF\DataBase\movie.db");
+        .UseSqlite(@"Data source = C:\\movie\\movie.db");
 
     }
 }

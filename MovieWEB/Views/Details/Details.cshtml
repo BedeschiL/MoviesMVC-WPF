@@ -40,7 +40,8 @@
         <thead>
             <tr>
                 <th width="150">Id</th>
-                <th width="150">Name</th>
+                <th width="150">Prenom</th>
+                <th width="150">Nom</th>
                 <th width="100">Details</th>
             </tr>
         </thead>
@@ -48,16 +49,17 @@
 
             @foreach (ActorDTO a in Model.ActorsDTO)
             {
-    <tr>
-        <td>@a.Id</td>
-        <td>@a.Name</td>
+            <tr>
+                <td>@a.Id</td>
+                <td>@a.Name</td>
+                <td>@a.Surname</td>
 
-        <td>
-            @Html.ActionLink("ActorDetail", "ActorDetail", "ActorDetail", new { test = a.Id.ToString() })
-            @Html.ActionLink("test", "test", "test", new { ID = a.Id })
+                <td>
+                    @Html.ActionLink("ActorDetail", "ActorDetail", "ActorDetail", new { id = a.Id.ToString() })
 
-        </td>
-    </tr>
+
+                </td>
+            </tr>
 }
 
         </tbody>
@@ -89,5 +91,5 @@
     </table>
 </div>
 < <td>
-                    @Html.ActionLink("Ajout Com", "Comment", "Home", new { ID = Model.Id });
+                    @Html.ActionLink("Ajout de commentaire", "Comment", "Comment", new { ID = Model.Id })
   </td>

@@ -105,6 +105,30 @@ namespace BLL_BusinessLogicLayer
 
             return (ListFilm);
         }
+        public List<FilmDTO> FindListFilmById(int id)
+        {
+            var listactor = dalManager.SelectActorWithId(id);
+
+            List<FilmDTO> ListFilm = new List<FilmDTO>();
+            
+            foreach (Actor a in listactor)
+            {
+                foreach (Film f in a.Films)
+                {
+                    f.Posterpath = getImage(f.Id);
+                    f.VoteAverage = voteAverageCalculator(f);
+
+                    List<CommentDTO> Comments = new List<CommentDTO>();
+                    foreach (Comment c in f.Comments)
+                    {
+                        Comments.Add(new CommentDTO(c.Content, c.Rate, c.Username, c.Date));
+                    }
+                    ListFilm.Add(new FilmDTO(f.Id, f.Title, f.Date, f.VoteAverage, f.Runtime, f.Posterpath, Comments));
+                }
+            }
+
+            return (ListFilm);
+        }
         #endregion
         #region GetFullFilmDetailsByIdFilm
         public FullFilmDTO GetFullFilmDetailsByIdFilm(int id)

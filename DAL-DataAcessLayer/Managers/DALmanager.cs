@@ -40,8 +40,12 @@ namespace DAL_DataAcessLayer.Managers
         {
             return movC.Actors.Include("Films").Where(a => a.Name.ToLower().Contains(name.ToLower()));
         }
+        public IQueryable<Actor> SelectActorWithId(int id)
+        {
+           return movC.Actors.Include("Films").Where(a => a.Id == id);
+        }
 
-        public IQueryable<Actor> SelectActorNbFilmMin(int NbFilmMin)
+            public IQueryable<Actor> SelectActorNbFilmMin(int NbFilmMin)
         {
             return movC.Actors.Include("Films").Where(a => a.Films.Count >= NbFilmMin).OrderBy(a => a.Films.Count);
         }

@@ -46,7 +46,7 @@ namespace MovieWebAPI.Controllers
 
         #region FindListFilmByPartialActorName
         [HttpGet]
-        [Route("actors")]
+        [Route("actorsName")]
         public ActionResult FindListFilmByPartialActorName(string name, int max)
         {
             BLLmanager bllm = new BLLmanager();
@@ -54,9 +54,18 @@ namespace MovieWebAPI.Controllers
             return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
+        [HttpGet]
+        [Route("actorsId")]
+        public ActionResult FindListFilmById(int id)
+        {
+            BLLmanager bllm = new BLLmanager();
+            var ret = bllm.FindListFilmById(id);
+            return ret != null ? Ok(ret) : (ActionResult)NotFound();
+
+        }
         #endregion
-   
-        
+
+
 
 
 
