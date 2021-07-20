@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUImovieWPF.View"
-             mc:Ignorable="d" Width="2000" Height="1000">
+             mc:Ignorable="d" Height="auto" Width="auto">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="1"/>
@@ -13,16 +17,16 @@
                 <GradientStop Color="#FF0C1849" Offset="0.512"/>
             </LinearGradientBrush>
         </Grid.Background>
-
-        <Label Content="Rechercher Film :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFD97209"/>
-        <TextBox x:Name="rstr" HorizontalAlignment="Left" Margin="115,11,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="384" Height="23"/>
-        <Button x:Name="recherche" Content="Recherche" HorizontalAlignment="Left" Margin="504,13,0,0" VerticalAlignment="Top" Click="recherche_Click" Foreground="#FFD97209" Width="70" />
-        <Button x:Name="prev" Content="Previous" HorizontalAlignment="Left" Margin="579,13,0,0" VerticalAlignment="Top" Click="prev_Click" Foreground="#FFD97209" Width="70"/>
-        <Label x:Name="page" Content="{Binding Page}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFD97209" Margin="654,10,0,0" Height="28" Width="60" />
-        <Button x:Name="next" Content="Next" HorizontalAlignment="Left" Margin="719,13,0,0" VerticalAlignment="Top" Click="next_Click" Foreground="#FFD97209" Width="70"/>
-        <Button x:Name="details" Content="Details" HorizontalAlignment="Left" Margin="794,13,0,0" VerticalAlignment="Top" Click="details_Click" Foreground="#FFD97209" Width="70" />
-
-        <DataGrid  x:Name="dtFilm" Margin="0,43,0,0" AutoGenerateColumns="false" ItemsSource="{Binding Films}" IsReadOnly="true" RowHeight="125" BorderBrush="#FF2D557C">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Rechercher Film :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFD97209"/>
+            <TextBox x:Name="rstr" HorizontalAlignment="Left" Margin="10,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="384" Height="23"/>
+            <Button x:Name="recherche" Content="Recherche" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Click="recherche_Click" Foreground="#FFD97209" Width="70" />
+            <Button x:Name="prev" Content="Previous" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Click="prev_Click" Foreground="#FFD97209" Width="70"/>
+            <Label x:Name="page" Content="{Binding Page}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFD97209" Height="25" Width="60" />
+            <Button x:Name="next" Content="Next" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Click="next_Click" Foreground="#FFD97209" Width="70"/>
+            <Button x:Name="details" Content="Details" HorizontalAlignment="Left" Margin="10,12,10,0" VerticalAlignment="Top" Click="details_Click" Foreground="#FFD97209" Width="70" />
+        </StackPanel>
+        <DataGrid x:Name="dtFilm" Grid.Row="1" AutoGenerateColumns="false" ItemsSource="{Binding Films}" IsReadOnly="true" RowHeight="125" BorderBrush="#FF2D557C" Margin="10,10,10,10">
             <DataGrid.Columns>
                 <DataGridTemplateColumn x:Name="Affiche" Header="Affiche" CanUserResize="False" CanUserReorder="False" IsReadOnly="True" MinWidth="30" >
                     <DataGridTemplateColumn.CellTemplate>
