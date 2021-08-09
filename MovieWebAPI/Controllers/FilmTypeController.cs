@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieWebAPI.Controllers
 {
-   
+    #region GetListFilmTypesByIdFilm //Route ="filmtype"
     [Route("filmtype")]
     public class FilmTypeController : Controller
     {
@@ -21,4 +21,5 @@ namespace MovieWebAPI.Controllers
             return ret != null ? Ok(ret) : (ActionResult)NotFound();
         }
     }
+    #endregion
 }

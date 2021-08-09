@@ -3,6 +3,25 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+    <div>
+        <div>
+            <label for="name">Titre du film : </label>
+        </div>
+        <span>
+            @using (Html.BeginForm("Recherche", "Recherche", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+                <button type="submit">Recherche</button>
+            }
+
+
+
+        </span>
+    </div>
+
+
 <div class="text-center">
     <table class="table-bordered">
         <thead>
@@ -39,7 +58,7 @@
                 }
                 }
                 <td>
-                    @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id });
+                    @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id })
                 </td>
             </tr>
             }

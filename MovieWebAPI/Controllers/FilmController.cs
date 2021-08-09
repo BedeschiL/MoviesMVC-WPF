@@ -14,7 +14,7 @@ namespace MovieWebAPI.Controllers
     {
 
 
-        #region GetFullFilmDetailsByIdFilm
+        #region GetFullFilmDetailsByIdFilm //Route = "details"
         [HttpGet]
         [Route("details")]
         public ActionResult GetFullFilmDetailsByIdFilm(int idF)
@@ -24,8 +24,11 @@ namespace MovieWebAPI.Controllers
             return ret != null ? Ok(ret) : (ActionResult)NotFound();
         }
         #endregion
+        #region GetFilmListWithName //Route = "title"
         [HttpGet]
         [Route("title")]
+        #endregion
+        #region  GetFilmListWithName
         public ActionResult GetFilmListWithName(string name, int index, int nbbypage)
         {
             BLLmanager bllm = new BLLmanager();
@@ -33,6 +36,8 @@ namespace MovieWebAPI.Controllers
             return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
+        #endregion
+        #region GetPageOfFilmDTOOrderByTitle //Route ="page"
         [HttpGet]
         [Route("page")]
         public ActionResult GetPageOfFilmDTOOrderByTitle(int index, int nbbypage)
@@ -43,8 +48,8 @@ namespace MovieWebAPI.Controllers
             return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
-
-        #region FindListFilmByPartialActorName
+        #endregion
+        #region FindListFilmByPartialActorName //Route = "actorsName"
         [HttpGet]
         [Route("actorsName")]
         public ActionResult FindListFilmByPartialActorName(string name, int max)

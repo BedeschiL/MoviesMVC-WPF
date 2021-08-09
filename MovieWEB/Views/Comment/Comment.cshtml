@@ -1,4 +1,4 @@
-﻿@model MovieWEB.Models.DetailsModel
+﻿@model MovieWEB.Models.CommentModel
 @{ 
     ViewData["Title"] = "Comment Page"; 
 }
@@ -52,7 +52,7 @@
             color: #c59b08;
         }
 </style>
-<h1>@Model.Id</h1>
+<h1>@Model.id</h1>
 <div>
     <label for="com"> Ajoutez un commentaire :</label>
 </div>
@@ -87,29 +87,37 @@
 
 
 <div>
-    <button onclick="ajoutComm()">Ajoutez un commentaire</button>
+    <button onclick="ajoutComm(@Model.id)">Ajoutez un commentaire</button>
 
 </div>
 
 
 <script type="text/javascript">
-    function ajoutComm() {
+    function ajoutComm(id) {
         var check;
         if ($('#star5').is(':checked')) { check = 5; }
         if ($('#star4').is(':checked')) { check = 4; }
         if ($('#star3').is(':checked')) { check = 3; }
         if ($('#star2').is(':checked')) { check = 2; }
         if ($('#star1').is(':checked')) { check = 1; }
-        console.log("TEST");
-        console.log("Check" + check);
-
-
         var username = document.getElementById("Username").value;
-        console.log("username :" + username);
-        console.log("id :" + id);
         var content = document.getElementById("commentSection").value;
-        console.log(content);
+        console.log("content" + content);
+        console.log("username" + username);
+        var request = new XMLHttpRequest()
+        // Open a new connection, using the GET request on the URL endpoint
+        console.log('http://localhost:5000/comment?idFilm=' + id + '&content=' + content + '&rate=' + check + '&username=' + username + '');
+        request.open('GET', 'http://localhost:5000/comment?idFilm=' + id + '&content=' + content + '&rate=' + check + '&username=' + username + '', true);
+        request.onload = function () {
+            // Begin accessing JSON data here
+        }
 
+        // Send request
+        request.send();
+            
+          
+
+        
     }
 
 </script>

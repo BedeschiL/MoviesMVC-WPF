@@ -28,21 +28,23 @@ namespace MovieWEB.Controllers
         }
         public IActionResult ActorDetail(string id)
         {
-            ActeurUImodel acm = new ActeurUImodel();
-
-            using (var client = new WebClient())
+            try
             {
-                //Get a string representation of the Json
-                string route = ConfigurationManager.AppSettings["apiActeur"] + id + ConfigurationManager.AppSettings["apiKey"];
-                String rawJson = client.DownloadString(route);
-                var data = (JObject)JsonConvert.DeserializeObject(rawJson);
-                acm.Name = data["name"].Value<string>();
-                acm.resume = data["biography"].Value<string>();
-                acm.birthplace = data["place_of_birth"].Value<string>();
-                acm.birthday = data["birthday"].Value<string>();
-                var tempToken = data["also_known_as"] as JArray;
-                acm.avatar = ConfigurationManager.AppSettings["apiActeurPic"] + data["profile_path"].Value<string>();
-            }
+                ActeurUImodel acm = new ActeurUImodel();
+
+                using (var client = new WebClient())
+                {
+                    //Get a string representation of the Json
+                    string route = ConfigurationManager.AppSettings["apiActeur"] + id + ConfigurationManager.AppSettings["apiKey"];
+                    String rawJson = client.DownloadString(route);
+                    var data = (JObject)JsonConvert.DeserializeObject(rawJson);
+                    acm.Name = data["name"].Value<string>();
+                    acm.resume = data["biography"].Value<string>();
+                    acm.birthplace = data["place_of_birth"].Value<string>();
+                    acm.birthday = data["birthday"].Value<string>();
+                    var tempToken = data["also_known_as"] as JArray;
+                    acm.avatar = ConfigurationManager.AppSettings["apiActeurPic"] + data["profile_path"].Value<string>();
+                }
                 string query = "actorsId?id=" + int.Parse(id);
                 using (var client = new WebClient())
                 {
@@ -53,8 +55,16 @@ namespace MovieWEB.Controllers
                     acm.Films = temDTO;
                     Console.WriteLine("countFilm" + temDTO.Count);
                     Trace.WriteLine("countFilm" + temDTO.Count);
+                    
                 }
-            return View(acm);
+                return View(acm);
+            }
+            catch(WebException wex)
+            {
+
+            }
+            return null;
+
         }  
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

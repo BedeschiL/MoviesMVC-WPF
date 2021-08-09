@@ -1,6 +1,5 @@
 ﻿using DTO_DataTransferObject;
 using GUImovieWEB.Models;
-using GUImovieWEB.Models.Films;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieWEB.Models;

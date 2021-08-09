@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MovieWebAPI.Controllers
 {
-    
+    #region GetListActorsByIdFilm //Route = "actor"
     [Route("actor")]
     public class ActorController : Controller
     {
@@ -20,6 +20,8 @@ namespace MovieWebAPI.Controllers
             return ret != null ? Ok(ret) : (ActionResult)NotFound();
 
         }
+        #endregion
+    #region GetFavoriteActors //Route ="favorite"
         [HttpGet]
         [Route("favorite")]
         public ActionResult GetFavoriteActors(int nbFilm)
@@ -30,4 +32,5 @@ namespace MovieWebAPI.Controllers
 
         }
     }
+    #endregion
 }

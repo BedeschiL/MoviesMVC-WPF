@@ -79,10 +79,10 @@
             @foreach (CommentDTO c in Model.CommentsDTO)
             {
         <tr>
-            <td>@c.Content</td>
+            <td><textarea> @c.Content</textarea></td>
             <td>@c.Date</td>
             <td>@c.Rate</td>
-            <td>@c.Content</td>
+            <td>@c.Username</td>
         </tr>
 }
 
