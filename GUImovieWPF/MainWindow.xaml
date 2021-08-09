@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000">
     <Grid>
-        <view:FilmView x:Name="FilmViewControl" Loaded="FilmViewControl_Loaded" HorizontalAlignment="Left"/>
+        <view:FilmView x:Name="FilmViewControl" Loaded="FilmViewControl_Loaded"/>
     </Grid>
 </Window>
