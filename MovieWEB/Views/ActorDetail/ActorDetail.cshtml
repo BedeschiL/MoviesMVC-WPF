@@ -8,41 +8,32 @@
 <h1>
     <img style="display: block; margin-left: auto; margin-right: auto;" width="185" height="278" src="@Model.avatar" />
 </h1>
-<h1>ACTEUR :</h1>
-<table class="table-bordered" style="height: 54px; width: 353px;">
-    <thead>
-        <tr style="height: 36px;">
-            <th style="height: 36px; width: 98px;"><em>Name</em></th>
-            <th style="height: 36px; width: 117px;">Date de naissance</th>
-            <th style="height: 36px; width: 127px;">Lieu de naissance</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr style="height: 18px;">
-            <td style="height: 18px; width: 98px;">@Model.Name</td>
-            <td style="height: 18px; width: 117px;">@Model.birthday</td>
-            <td style="height: 18px; width: 127px;">@Model.birthplace</td>
-        </tr>
-    </tbody>
-</table>
-<h2><span style="text-decoration: underline;">Also Know as :</span></h2>
-<table class="table-bordered" style="height: 34px; width: 48px;">
-    <thead>
-        <tr>
-            <th width="50">Alias</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Name)
-        {
-<td>
-<th scope="row">@item</th>
-    </td>}
-        </tbody>
+<div>
 
-    </table>
 
+    <h1 style="padding-left:42%;">ACTEUR :</h1>
     <table class="table-bordered" style="height: 54px; width: 353px;">
+        <thead>
+            <tr style="height: 36px;">
+                <th style="height: 36px; width: 98px;"><em>Name</em></th>
+                <th style="height: 36px; width: 117px;">Date de naissance</th>
+                <th style="height: 36px; width: 127px;">Lieu de naissance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="height: 18px;">
+                <td style="height: 18px; width: 98px;">@Model.Name</td>
+                <td style="height: 18px; width: 117px;">@Model.birthday</td>
+                <td style="height: 18px; width: 127px;">@Model.birthplace</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2><span style="text-decoration: underline;">Also Know as :</span></h2>
+
+    <h1>Alias :</h1>
+    <p>Model.name</p>
+
+    <table class="table-bordered" style="height: 54px; width: 800px;">
         <thead>
             <tr style="height: 36px;">
                 <th style="height: 36px; width: 98px;"><em>Biographie :</em></th>
@@ -82,6 +73,8 @@
     <td>
         @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id })
     </td>
-</tr>}
+</tr>
+}
         </tbody>
     </table>
+</div>

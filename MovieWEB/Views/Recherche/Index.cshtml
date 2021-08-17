@@ -37,28 +37,16 @@
                         }
                     }
                     <td>
-                        @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id });
+                        @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id})
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-@{
-    ListFilmModel temp = Model;
-    temp.name = Model.name;
-
-
-}
 <table align="center">
     <tr>
-
-        <td>
-            @Html.ActionLink("Precedent", "Recherche", "Recherche", new { test = temp.name, localisation = "prec" });
-        </td>
-        <td>
-            @Html.ActionLink("Suivant", "Recherche", "Recherche", new { test = temp.name, localisation ="suiv"});
-        </td>
+        <td><a class="nav-link text-dark" data="1" asp-area="" asp-controller="Recherche" asp-action="BouttonPrevious">Precedent</a></td>
+        <td><a class="nav-link text-dark"  asp-area="" asp-controller="Recherche" asp-action="BouttonNext">Suivant</a></td>
     </tr>
 </table>
-

@@ -16,11 +16,13 @@ namespace MovieWEB.Controllers
     public class RechercheController : Controller
     {
         private readonly ILogger<FilmController> _logger;
-        private static ListFilmModel FilmModel = new ListFilmModel();
+        private static ListFilmModel FilmModel;
         private static int currentFilm = 0, nbFilm = 5;
+        private static string Title;
+        private static string Name;
         public RechercheController(ILogger<FilmController> logger)
         {
-          
+         
             _logger = logger;
         }
         private void LoadFilmFromAPI(int index, int nbbypage, string name)
@@ -30,6 +32,7 @@ namespace MovieWEB.Controllers
             string query = "title?name=" + name + "&index=" + index + "&nbbypage=" + nbbypage;
             using (var client = new WebClient())
             {
+                FilmModel = new ListFilmModel();
                 //Get a string representation of the Json
                 String finalQuery = (ConfigurationManager.AppSettings["basicUrl"] + query);
                 String rawJson = client.DownloadString(finalQuery);
@@ -40,42 +43,59 @@ namespace MovieWEB.Controllers
                 }
             }
         }
-        public IActionResult Recherche(ListFilmModel model, string test, string localisation)
+      
+        #region Boutton
+        [Route("RechercheConttroller/BouttonPrevious")]
+        public IActionResult BouttonPrevious()
         {
-            if(localisation!=null && localisation.CompareTo("") != 0)
-            {
-                if(localisation.CompareTo("suiv")==0)
-                {
-                    currentFilm += 5;
-                }
-                else
-                {
-                    currentFilm -= 5;
-                }
-
-
-            }
-
           
-            Trace.WriteLine("MODEL NAME )====" + model.name);
-            Trace.WriteLine("Test NAME )====" + test);
-            Trace.WriteLine("LOCALISATION  )====" + localisation);
-            FilmModel.name = model.name;
-            if (model.name != null && model.name.CompareTo("") != 0)
+            Trace.WriteLine("prec");
+            if (currentFilm == 0)
             {
-                Trace.WriteLine("test model name");
-                LoadFilmFromAPI(currentFilm, nbFilm, model.name);
+
             }
-            else if (test!=null && test.CompareTo("")!=0)
+            else
             {
-                Trace.WriteLine("test name");
-                LoadFilmFromAPI(currentFilm, nbFilm, test);
+                currentFilm -= 5;
             }
-           
-           
-            Trace.WriteLine("CURRENT" + currentFilm + " NB FILM" + nbFilm);
-            
+            LoadFilmFromAPI(currentFilm, nbFilm, Name);
+            return View("Index", FilmModel);
+        }
+        [Route("RechercheConttroller/BouttonNext")]
+        public IActionResult BouttonNext()
+        {
+          
+            Trace.WriteLine("suiv");
+            currentFilm += 5;
+            LoadFilmFromAPI(currentFilm, nbFilm, Name);
+            return View("Index", FilmModel);
+        }
+        #endregion
+        public IActionResult Index()
+        {
+            Trace.WriteLine("INDEX");
+            FilmModel = new ListFilmModel();
+
             return View(FilmModel);
+        }
+        public IActionResult Recherche(string title, string name)
+        {
+            if(name==null)
+            {
+                return RedirectToAction("Index", "");
+            }
+            else
+            {
+                Title = title;
+                Name = name;
+                Trace.WriteLine("------------");
+                Trace.WriteLine("name :" + name);
+                Trace.WriteLine("title :" + title);
+                Trace.WriteLine("------------");
+                LoadFilmFromAPI(currentFilm, nbFilm, name);
+            }
+          
+            return View("index", FilmModel);
         }
         public IActionResult Privacy()
         {
