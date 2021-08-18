@@ -7,12 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace MovieWEB.Controllers
 {
@@ -20,7 +15,7 @@ namespace MovieWEB.Controllers
     {
 		private readonly ILogger<FilmController> _logger;
         private ListFilmModel FilmModel = new ListFilmModel();
-        private static int currentFilm=0, nextfilm=5;
+        private static int currentFilm=0, nbFilm=5;
 
         public FilmController(ILogger<FilmController> logger)
 		{			
@@ -52,7 +47,7 @@ namespace MovieWEB.Controllers
             }
            else
             {
-                currentFilm -= 5;
+                currentFilm -= nbFilm;
             }
            
           
@@ -64,7 +59,7 @@ namespace MovieWEB.Controllers
         {
           
 
-            currentFilm += 5;
+            currentFilm += nbFilm;
              
            
             return RedirectToAction("Index", "Film");
@@ -73,7 +68,7 @@ namespace MovieWEB.Controllers
         public IActionResult Index()
         {
             
-            LoadFilmFromAPI(currentFilm, nextfilm);
+            LoadFilmFromAPI(currentFilm, nbFilm);
             return View(FilmModel);
         }
 

@@ -12,7 +12,6 @@
             <form action="/Recherche/Recherche/" style="margin-bottom:15px; margin-top:15px;">
                 <label for="name">Nom : </label>
                 <input type="text" name="name" id="name" /><br />
-                <input type="hidden" name="title" id="title" />
                 <input type="submit" value="Rechercher" />
             </form>
 
@@ -58,7 +57,7 @@
                 }
                 }
                 <td>
-                    @Html.ActionLink("Details", "Details", "Details", new { ID = item.Id })
+                    @Html.ActionLink("⚙", "Details", "Details", new { ID = item.Id })
                 </td>
             </tr>
             }

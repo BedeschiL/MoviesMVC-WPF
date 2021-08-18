@@ -18,7 +18,7 @@ namespace MovieWEB.Controllers
         private readonly ILogger<FilmController> _logger;
         private static ListFilmModel FilmModel;
         private static int currentFilm = 0, nbFilm = 5;
-        private static string Title;
+       
         private static string Name;
         public RechercheController(ILogger<FilmController> logger)
         {
@@ -45,7 +45,7 @@ namespace MovieWEB.Controllers
         }
       
         #region Boutton
-        [Route("RechercheConttroller/BouttonPrevious")]
+        [Route("/loadPrev")]
         public IActionResult BouttonPrevious()
         {
           
@@ -56,17 +56,17 @@ namespace MovieWEB.Controllers
             }
             else
             {
-                currentFilm -= 5;
+                currentFilm -= nbFilm;
             }
             LoadFilmFromAPI(currentFilm, nbFilm, Name);
             return View("Index", FilmModel);
         }
-        [Route("RechercheConttroller/BouttonNext")]
+        [Route("/loadNext")]
         public IActionResult BouttonNext()
         {
           
             Trace.WriteLine("suiv");
-            currentFilm += 5;
+            currentFilm += nbFilm;
             LoadFilmFromAPI(currentFilm, nbFilm, Name);
             return View("Index", FilmModel);
         }
@@ -86,7 +86,7 @@ namespace MovieWEB.Controllers
             }
             else
             {
-                Title = title;
+               
                 Name = name;
                 Trace.WriteLine("------------");
                 Trace.WriteLine("name :" + name);
