@@ -20,9 +20,9 @@ namespace DAL_DataAcessLayer.Managers
             movC = new MovieContext();
         }
         #endregion
-        public Film SelectFilmWithId(int IDF)
+        public Film SelectFilmWithId(int id)
         {
-            return movC.Films.Include("Actors").Include("Types").Include("Comments").FirstOrDefault(f => f.Id == IDF);
+            return movC.Films.Include("Actors").Include("Types").Include("Comments").FirstOrDefault(f => f.Id == id);
         }
 
         public IQueryable<Film> GetPageOfFilmOrderByTitle(int index, int numberbypage)

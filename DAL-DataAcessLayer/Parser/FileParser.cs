@@ -8,7 +8,7 @@ namespace DAL_DataAcessLayer.Parser
 {
     public class FileParser
     {
-        public void LoadTextFileInDB(String file, int NbFilmToLoad)
+        public void LoadTextFileInDB(string file, int NbFilmToLoad)
         {
             Console.WriteLine("Test lecture fichier");
 

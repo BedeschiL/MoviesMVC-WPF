@@ -44,27 +44,27 @@ namespace GUImovieWPF.Model
         {
             string filename = "0etoiles.png";
 
-            if (VoteAverage > 0f && VoteAverage < 2f)
+            if (VoteAverage > 0f && VoteAverage <= 2f)
             {
                 filename = "1etoile.PNG";
             }
             else
-            if (VoteAverage > 2f && VoteAverage < 4f)
+            if (VoteAverage > 2f && VoteAverage <= 4f)
             {
                 filename = "2etoiles.PNG";
             }
             else
-            if (VoteAverage > 4f && VoteAverage < 6f)
+            if (VoteAverage > 4f && VoteAverage <= 6f)
             {
                 filename = "3etoiles.PNG";
             }
             else
-            if (VoteAverage > 6f && VoteAverage < 8f)
+            if (VoteAverage > 6f && VoteAverage <= 8f)
             {
-                filename = "1etoile.PNG";
+                filename = "4etoiles.PNG";
             }
             else
-            if (VoteAverage > 8f && VoteAverage < 10f)
+            if (VoteAverage > 8f && VoteAverage <= 10f)
             {
                 filename = "5etoiles.PNG";
             }
