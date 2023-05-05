@@ -1,4 +1,4 @@
 # WEB-Cinema
 NouveauDepot
 
-Licence3 projet, database with multiple-layer architecture
+Bachelor 3  project : database with multiple-layer architecture
